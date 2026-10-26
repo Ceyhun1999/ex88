@@ -15,9 +15,20 @@
   --tg: #229ED9;
   --tg-hover: #1B88BD;
   --mint: #C9F2DF;
+  --star: #F5B100;
   --on-dark: #FFFFFF;
   --on-dark-muted: rgba(255, 255, 255, 0.72);
   --on-dark-line: rgba(255, 255, 255, 0.14);
+
+  /* Roles that change with the theme */
+  --surface: #FFFFFF;
+  --tint: var(--mint);
+  --on-tint: var(--green-900);
+  --accent: var(--green-600);
+  --solid: var(--green-900);
+  --inverse: var(--ink);
+  --on-inverse: #FFFFFF;
+  --shadow: #0B3B2C;
 
   --font-display: "Unbounded", "Arial Black", sans-serif;
   --font-text: "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -28,9 +39,37 @@
   --radius-pill: 999px;
 
   --container: 1280px;
-  --shadow-bubble: 0 1px 2px rgba(11, 59, 44, 0.06), 0 4px 10px -4px rgba(11, 59, 44, 0.1), 0 18px 36px -18px rgba(11, 59, 44, 0.28);
+  --shadow-bubble: 0 1px 2px color-mix(in srgb, var(--shadow) 6%, transparent), 0 4px 10px -4px color-mix(in srgb, var(--shadow) 10%, transparent), 0 18px 36px -18px color-mix(in srgb, var(--shadow) 28%, transparent);
   --header-h: 72px;
   --ticker-h: 34px;
+
+  color-scheme: light;
+}
+
+/* Dark theme: night green rather than neutral black, so the brand panels still read as one family */
+:root[data-theme="dark"] {
+  --paper: #0A1712;
+  --surface: #12231C;
+  --field: #1A2D25;
+  --line: #273C33;
+  --ink: #E8F1EC;
+  --ink-muted: #9FB3A9;
+  --tint: #173F30;
+  --on-tint: #C9F2DF;
+  --accent: #4CC79A;
+  --solid: var(--green-600);
+  --inverse: #E8F1EC;
+  --on-inverse: #0A1712;
+  --shadow: #000000;
+
+  color-scheme: dark;
+}
+
+/* Switching themes is instant: no colour transitions for that one frame */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
 }
 
 /* ==========================================================================
@@ -38,6 +77,11 @@
    ========================================================================== */
 html {
   scroll-padding-top: calc(var(--ticker-h) + var(--header-h) + 16px);
+}
+
+/* A block focused after an in-page jump shows no focus ring; its contents keep theirs */
+[tabindex="-1"]:focus {
+  outline: none;
 }
 
 button,
@@ -62,7 +106,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--green-600);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -122,9 +166,8 @@ body {
 }
 
 .btn--tg svg {
-  width: 32px;
-  height: 32px;
-  margin-block: -6px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 }
 
@@ -139,11 +182,11 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--white);
+  background: var(--surface);
 }
 
 .site-header.is-scrolled {
-  box-shadow: 0 10px 30px -18px rgba(11, 59, 44, 0.35);
+  box-shadow: 0 10px 30px -18px color-mix(in srgb, var(--shadow) 35%, transparent);
 }
 
 /* Rate ticker, like the board in an exchange office */
@@ -164,9 +207,9 @@ body {
   height: calc(var(--ticker-h) - 1px);
   display: grid;
   place-items: center;
-  background: var(--white);
+  background: var(--surface);
   color: var(--ink-muted);
-  box-shadow: -14px 0 12px 2px var(--white);
+  box-shadow: -14px 0 12px 2px var(--surface);
   transition: color 0.2s ease;
 }
 
@@ -243,9 +286,24 @@ body {
   margin-right: auto;
 }
 
-.logo img {
+.logo__mark {
+  flex-shrink: 0;
   width: 44px;
-  height: 44px;
+  height: 42px;
+}
+
+/* Green coin inside the arrows with a black 88, as on the original mark.
+   The arrows follow the text colour (black, white at night). */
+.logo__disc {
+  fill: var(--green-600);
+}
+
+.logo__arrows {
+  fill: var(--ink);
+}
+
+.logo__digits {
+  fill: #000000;
 }
 
 .logo__text {
@@ -291,8 +349,8 @@ body {
   left: 4px;
   width: calc((100% - 8px) / 2);
   border-radius: var(--radius-pill);
-  background: var(--white);
-  box-shadow: 0 1px 3px rgba(11, 59, 44, 0.18);
+  background: var(--surface);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--shadow) 18%, transparent);
 }
 
 .country-switch[data-active="1"]::before {
@@ -345,7 +403,7 @@ body {
   bottom: -6px;
   height: 2px;
   border-radius: 2px;
-  background: var(--green-600);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s ease;
@@ -379,12 +437,49 @@ body {
 }
 
 .header__tg svg {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
 }
 
 .header__tg-label {
   display: none;
+}
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--ink);
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--tint);
+}
+
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  transition: rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle:hover svg {
+  rotate: -15deg;
+}
+
+/* The icon shows the theme a press switches to */
+.theme-toggle__sun,
+:root[data-theme="dark"] .theme-toggle__moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle__sun {
+  display: block;
 }
 
 .burger {
@@ -429,9 +524,9 @@ body {
   right: 16px;
   margin-top: 8px;
   padding: 20px;
-  background: var(--white);
+  background: var(--surface);
   border-radius: var(--radius-card);
-  box-shadow: 0 24px 48px -20px rgba(11, 59, 44, 0.4), 0 0 0 1px var(--line);
+  box-shadow: 0 24px 48px -20px color-mix(in srgb, var(--shadow) 40%, transparent), 0 0 0 1px var(--line);
 }
 
 .header__menu.is-open .country-switch {
@@ -498,7 +593,8 @@ body {
   height: 100%;
 }
 
-.hero__pattern path {
+.hero__pattern path,
+.contact__pattern path {
   fill: none;
   stroke: var(--mint);
   stroke-opacity: 0.16;
@@ -634,7 +730,7 @@ body {
 .calculator {
   grid-area: calc;
   position: relative;
-  background: var(--white);
+  background: var(--surface);
   color: var(--ink);
   border-radius: var(--radius-card);
   padding: 24px 16px 16px;
@@ -674,8 +770,8 @@ body {
 }
 
 .calculator__row:focus-within {
-  border-color: var(--green-600);
-  background: var(--white);
+  border-color: var(--accent);
+  background: var(--surface);
 }
 
 .calculator__row input {
@@ -696,11 +792,11 @@ body {
 }
 
 .calculator__row--result {
-  background: var(--mint);
+  background: var(--tint);
 }
 
 .calculator__row--result:focus-within {
-  background: var(--mint);
+  background: var(--tint);
   border-color: transparent;
 }
 
@@ -710,7 +806,7 @@ body {
 
 @keyframes result-flash {
   0% { background: var(--green-600); }
-  100% { background: var(--mint); }
+  100% { background: var(--tint); }
 }
 
 .calculator__row--result.is-updated input {
@@ -729,16 +825,16 @@ body {
   height: 52px;
   padding: 0 8px 0 10px;
   border-radius: 10px;
-  background: var(--white);
+  background: var(--surface);
   font-weight: 600;
   font-size: 16px;
   flex-shrink: 0;
-  box-shadow: 0 1px 2px rgba(11, 59, 44, 0.12);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--shadow) 12%, transparent);
   transition: box-shadow 0.2s ease;
 }
 
 .currency-select:hover {
-  box-shadow: 0 2px 8px rgba(11, 59, 44, 0.22);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--shadow) 22%, transparent);
 }
 
 .currency-select__flag {
@@ -777,12 +873,12 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--ink);
-  color: var(--on-dark);
+  background: var(--inverse);
+  color: var(--on-inverse);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 4px solid var(--white);
+  border: 4px solid var(--surface);
   box-sizing: content-box;
   transition: background-color 0.2s ease;
 }
@@ -818,9 +914,9 @@ body {
   z-index: 30;
   min-width: 248px;
   padding: 6px;
-  background: var(--white);
+  background: var(--surface);
   border-radius: 16px;
-  box-shadow: 0 24px 48px -16px rgba(11, 59, 44, 0.35), 0 0 0 1px var(--line);
+  box-shadow: 0 24px 48px -16px color-mix(in srgb, var(--shadow) 35%, transparent), 0 0 0 1px var(--line);
 }
 
 .currency-list[hidden] {
@@ -843,7 +939,7 @@ body {
 }
 
 .currency-list button[aria-selected="true"] {
-  background: var(--mint);
+  background: var(--tint);
 }
 
 .currency-list__flag {
@@ -874,8 +970,19 @@ body {
 
 .accept__card {
   padding: 28px 20px 20px;
-  background: var(--white);
+  background: var(--surface);
   border-radius: var(--radius-panel);
+  color: var(--ink);
+}
+
+/* This card keeps the night-green look in both themes (same values as the dark theme) */
+.accept__card {
+  --surface: #12231C;
+  --ink: #E8F1EC;
+  --ink-muted: #9FB3A9;
+  --line: #273C33;
+
+  color-scheme: dark;
 }
 
 .accept__title {
@@ -912,8 +1019,8 @@ body {
   min-height: 116px;
   padding: 16px 18px;
   border-radius: 20px;
-  background: linear-gradient(140deg, color-mix(in srgb, var(--brand) 16%, #fff) 0%, #fff 72%);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 26%, #fff);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--brand) 16%, var(--surface)) 0%, var(--surface) 72%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 26%, var(--surface));
 }
 
 .accept__item::before {
@@ -945,8 +1052,8 @@ body {
   justify-self: end;
   padding: 5px 9px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 30%, #fff);
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 30%, var(--surface));
   font-size: 12px;
   font-weight: 600;
   line-height: 1;
@@ -963,6 +1070,179 @@ body {
   font-size: 16px;
   line-height: 1.2;
   letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Ways to receive
+   ========================================================================== */
+.receive {
+  padding-bottom: 80px;
+}
+
+.receive__head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.receive__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 5.2vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.receive__lead {
+  max-width: 46ch;
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+
+.receive__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* A showcase tile: the render keeps its own dark backdrop, and the tile
+   continues it, so the picture's bottom edge melts into the caption. */
+.receive__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-bottom: 16px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--tile, #1A1A1A);
+  color: var(--on-dark);
+}
+
+/* Checkerboard of two tones, so the difference between tiles reads as intended.
+   Two columns: 1 4 5 dark, 2 3 6 light. Three columns: odd dark, even light. */
+.receive__list {
+  --tile-dark: #141414;
+  --tile-light: #232323;
+}
+
+.receive__item {
+  --tile: var(--tile-light);
+}
+
+.receive__item:nth-child(4n + 1),
+.receive__item:nth-child(4n) {
+  --tile: var(--tile-dark);
+}
+
+.receive__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  /* Soft oval fade: the render's own dark backdrop melts into either tile tone */
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 46%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 68% at 50% 46%, #000 62%, transparent 100%);
+}
+
+.receive__tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.receive__name {
+  margin-top: -8px;
+  padding-inline: 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.receive__text {
+  margin-top: 6px;
+  padding-inline: 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--on-dark-muted);
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .receive__list {
+    gap: 16px;
+  }
+
+  .receive__item {
+    padding-bottom: 22px;
+    border-radius: var(--radius-card);
+  }
+
+  .receive__tag {
+    top: 16px;
+    left: 16px;
+    padding: 6px 11px;
+    font-size: 13px;
+  }
+
+  .receive__name {
+    padding-inline: 22px;
+    font-size: 18px;
+  }
+
+  .receive__text {
+    padding-inline: 22px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .receive__head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .receive__lead {
+    max-width: 40ch;
+    text-align: right;
+  }
+
+  .receive__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .receive__item:nth-child(n) {
+    --tile: var(--tile-light);
+  }
+
+  .receive__item:nth-child(odd) {
+    --tile: var(--tile-dark);
+  }
+
+  .receive__name {
+    padding-inline: 26px;
+    font-size: 20px;
+  }
+
+  .receive__text {
+    padding-inline: 26px;
+    font-size: 16px;
+  }
 }
 
 /* ==========================================================================
@@ -1000,25 +1280,29 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--white);
+  background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--line);
   color: var(--ink);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.reviews__arrow:hover:not([aria-disabled="true"]) {
-  background: var(--ink);
-  color: var(--on-dark);
-}
-
-.reviews__arrow[aria-disabled="true"] {
-  opacity: 0.35;
-  cursor: default;
+.reviews__arrow:hover {
+  background: var(--inverse);
+  color: var(--on-inverse);
 }
 
 .reviews__arrow svg {
   width: 20px;
   height: 20px;
+}
+
+.reviews__icon-play,
+.reviews__auto.is-paused .reviews__icon-pause {
+  display: none;
+}
+
+.reviews__auto.is-paused .reviews__icon-play {
+  display: block;
 }
 
 /* The padding gives the bubble shadows room inside the scroll container,
@@ -1054,9 +1338,9 @@ body {
   flex-direction: column;
   flex: 1;
   min-width: 0;
-  padding: 18px 18px 14px;
+  padding: 18px;
   border-radius: 22px 22px 22px 6px;
-  background: var(--white);
+  background: var(--surface);
   box-shadow: var(--shadow-bubble);
 }
 
@@ -1091,7 +1375,7 @@ body {
 
 .review__name {
   font-weight: 600;
-  color: var(--green-600);
+  color: var(--accent);
 }
 
 .review__city {
@@ -1099,80 +1383,23 @@ body {
   color: var(--ink-muted);
 }
 
+.review__stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+  color: var(--star);
+}
+
+.review__stars svg {
+  width: 16px;
+  height: 16px;
+}
+
 .review__text {
   flex: 1;
   overflow-wrap: break-word;
   font-size: 16px;
   line-height: 1.55;
-}
-
-.review__deal {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 10px;
-  margin-top: 16px;
-  padding: 10px 14px;
-  border-radius: 14px;
-  background: var(--mint);
-  color: var(--green-900);
-}
-
-.review__deal svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  color: var(--green-600);
-}
-
-.review__sum {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 16px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.review__sum small {
-  font-family: var(--font-text);
-  font-weight: 600;
-  font-size: 12px;
-  color: var(--green-600);
-}
-
-.reviews__dots {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 16px;
-}
-
-.reviews__dots[hidden] {
-  display: none;
-}
-
-.reviews__dot {
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 4px;
-}
-
-.reviews__dot::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-pill);
-  background: #C5D0CA;
-  transition: background-color 0.2s ease;
-}
-
-.reviews__dot:hover::before {
-  background: var(--ink-muted);
-}
-
-.reviews__dot[aria-current="true"]::before {
-  width: 24px;
-  background: var(--green-600);
 }
 
 @media (min-width: 768px) {
@@ -1192,7 +1419,7 @@ body {
   }
 
   .review__bubble {
-    padding: 20px 22px 16px;
+    padding: 20px 22px;
   }
 }
 
@@ -1323,6 +1550,1303 @@ body {
 
   .header__tg-label {
     display: inline;
+  }
+}
+
+/* ==========================================================================
+   Offices
+   ========================================================================== */
+.offices {
+  padding-bottom: 80px;
+}
+
+.offices__title {
+  margin-bottom: 24px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 5.2vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.offices__panel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+}
+
+/* Office switcher: chips that scroll sideways on phones, a vertical list on desktop.
+   Built for five offices and more. */
+.offices__tabs {
+  display: flex;
+  gap: 6px;
+  margin: 0 -20px;
+  padding: 20px 20px 4px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 20px;
+  scrollbar-width: none;
+}
+
+.offices__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.offices__tabs[hidden] {
+  display: none;
+}
+
+.offices__tab {
+  flex-shrink: 0;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  transition: background-color 0.2s ease;
+}
+
+.offices__tab:hover {
+  background: var(--tint);
+}
+
+.offices__tab[aria-selected="true"] {
+  background: var(--solid);
+  box-shadow: none;
+  color: var(--on-dark);
+}
+
+.offices__side {
+  min-width: 0;
+  padding: 0 20px;
+}
+
+.offices__map {
+  height: 280px;
+  background: var(--field);
+}
+
+.offices__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Google's embed has no dark style; invert it and turn the hues back */
+:root[data-theme="dark"] .offices__map iframe {
+  filter: invert(0.9) hue-rotate(180deg) saturate(0.8);
+}
+
+/* Column so the buttons sit at the bottom: they stay put whichever office is shown */
+.office {
+  display: flex;
+  flex-direction: column;
+  padding-block: 20px 24px;
+}
+
+.office__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.office__floor {
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.office__address {
+  margin-top: 10px;
+  font-style: normal;
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+
+.office__actions {
+  display: grid;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.office__route {
+  gap: 10px;
+  padding-block: 16px;
+  font-size: 16px;
+}
+
+.office__route svg,
+.office__copy svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.office__route:hover svg,
+.office__copy:hover svg {
+  scale: 1.12;
+}
+
+.office__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border-radius: var(--radius-field);
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--on-tint);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  transition: background-color 0.2s ease;
+}
+
+.office__copy:hover {
+  background: var(--tint);
+}
+
+@media (min-width: 560px) {
+  .office__actions {
+    grid-template-columns: repeat(2, max-content);
+  }
+}
+
+@media (min-width: 768px) {
+  .offices__map {
+    height: 340px;
+  }
+
+  .offices__side {
+    padding-inline: 32px;
+  }
+
+  .offices__tabs {
+    margin-inline: -32px;
+    padding: 24px 32px 4px;
+    scroll-padding-inline: 32px;
+  }
+
+  .office {
+    padding-block: 24px 32px;
+  }
+}
+
+/* Desktop: office list and card on the left, the map fills the right */
+@media (min-width: 1024px) {
+  .offices__title {
+    margin-bottom: 32px;
+  }
+
+  .offices__panel {
+    grid-template-columns: 400px minmax(0, 1fr);
+    min-height: 420px;
+  }
+
+  .offices__side {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 24px 28px;
+  }
+
+  /* Pills wrap onto new lines as offices are added */
+  .offices__tabs {
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .office {
+    margin-top: 16px;
+    padding: 16px 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .offices__map {
+    height: auto;
+  }
+
+  .office__actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+.faq {
+  padding-bottom: 80px;
+}
+
+.faq__inner {
+  display: grid;
+  gap: 24px;
+}
+
+/* Only the "didn't find an answer" box lives here, and only on desktop */
+.faq__aside {
+  display: none;
+}
+
+.faq__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 5.2vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.faq__lead {
+  margin-top: 8px;
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+
+/* One sheet with hairlines between questions, not a stack of cards */
+.faq__panel {
+  display: grid;
+  gap: 28px;
+  padding: 24px 18px 8px;
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+}
+
+.faq__group-title {
+  padding-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq__item:last-child {
+  border-bottom: 0;
+}
+
+.faq__q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s ease;
+}
+
+.faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq__q:hover {
+  color: var(--accent);
+}
+
+.faq__q:focus-visible {
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.faq__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin-top: -2px;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--field);
+  color: var(--on-tint);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.faq__q:hover .faq__icon {
+  background: var(--tint);
+}
+
+/* Open state switches instantly: plus becomes minus */
+.faq__item[open] .faq__plus {
+  display: none;
+}
+
+.faq__item[open] .faq__icon {
+  background: var(--solid);
+  color: var(--on-dark);
+}
+
+/* Shown beside the list on desktop; on smaller screens the contact block below does this job.
+   A small chat scene on the brand green, with the same guilloche waves as the hero. */
+.faq__ask {
+  display: none;
+}
+
+.faq__ask-pattern {
+  position: absolute;
+  z-index: -1;
+  width: 760px;
+  height: 760px;
+  top: -380px;
+  right: -380px;
+}
+
+.faq__ask-pattern svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.faq__ask-pattern path {
+  fill: none;
+  stroke: var(--mint);
+  stroke-opacity: 0.16;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Fixed height so the card never grows; older bubbles slide up and fade at the top */
+.faq__chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 232px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40px);
+  mask-image: linear-gradient(to bottom, transparent, #000 40px);
+}
+
+.faq__chat-list {
+  display: grid;
+  gap: 8px;
+}
+
+.faq__bubble.is-new {
+  animation: faq-bubble-in 0.38s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.faq__bubble--out.is-new {
+  transform-origin: right bottom;
+}
+
+.faq__bubble--in.is-new {
+  transform-origin: left bottom;
+}
+
+@keyframes faq-bubble-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+
+.faq__bubble {
+  max-width: 88%;
+  padding: 11px 16px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* The visitor's message, on the right like in a messenger */
+.faq__bubble--out {
+  justify-self: end;
+  border-radius: 18px 18px 6px 18px;
+  background: var(--mint);
+  color: var(--green-900);
+}
+
+/* The manager typing back */
+.faq__bubble--in {
+  justify-self: start;
+  border-radius: 18px 18px 18px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px var(--on-dark-line);
+}
+
+.faq__typing {
+  display: inline-flex;
+  gap: 5px;
+  padding: 15px 16px;
+}
+
+.faq__typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--on-dark);
+  opacity: 0.35;
+  animation: faq-typing 1.4s ease-in-out infinite;
+}
+
+.faq__typing span:nth-child(2) { animation-delay: 0.18s; }
+.faq__typing span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes faq-typing {
+  0%, 60%, 100% { opacity: 0.35; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__typing span {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+.faq__ask-text {
+  margin-bottom: 16px;
+  color: var(--on-dark-muted);
+  text-wrap: pretty;
+}
+
+.faq__a {
+  max-width: 64ch;
+  padding-bottom: 18px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .faq__panel {
+    padding: 32px 32px 12px;
+  }
+
+  .faq__q {
+    padding-block: 20px;
+    font-size: 17px;
+  }
+
+  .faq__a {
+    padding-right: 44px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .faq__inner {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: start;
+    gap: 48px;
+  }
+
+  .faq__aside {
+    display: block;
+    position: sticky;
+    top: calc(var(--ticker-h) + var(--header-h) + 32px);
+  }
+
+  /* Narrower sides on small laptops so the lead fits on one line */
+  .faq__panel {
+    padding: 40px 24px 16px;
+  }
+
+  .faq__ask {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: block;
+    padding: 32px 28px 28px;
+    border-radius: var(--radius-panel);
+    background: var(--green-900);
+    color: var(--on-dark);
+  }
+
+  .faq__q {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .faq__panel {
+    padding-inline: 40px;
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+/* Quiet on purpose: the green contact panel above is the page's last loud moment */
+.site-footer {
+  padding-block: 8px 32px;
+  font-size: 15px;
+  color: var(--ink-muted);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 16px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.footer__brand,
+.footer__legal {
+  grid-column: 1 / -1;
+}
+
+.footer__brand .logo {
+  color: var(--ink);
+}
+
+.footer__about {
+  max-width: 32ch;
+  margin-top: 16px;
+  text-wrap: pretty;
+}
+
+.footer__heading {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.footer__links {
+  display: grid;
+  gap: 4px;
+}
+
+.footer__links a,
+.footer__docs a {
+  display: inline-block;
+  padding-block: 4px;
+  color: var(--ink-muted);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.footer__links a:hover,
+.footer__docs a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.footer__legal {
+  display: grid;
+  gap: 4px;
+}
+
+.footer__legal address {
+  font-style: normal;
+}
+
+.footer__company {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.footer__docs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+}
+
+.footer__docs a {
+  padding-block: 0;
+  text-decoration-color: var(--line);
+}
+
+@media (min-width: 768px) {
+  .footer__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer__legal {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-footer {
+    padding-bottom: 40px;
+  }
+
+  .footer__grid {
+    grid-template-columns: minmax(0, 4fr) repeat(2, minmax(0, 2fr)) minmax(0, 4fr);
+    gap: 48px;
+    padding-top: 56px;
+  }
+
+  .footer__brand {
+    grid-column: auto;
+  }
+}
+
+/* ==========================================================================
+   Floating contact button
+   ========================================================================== */
+.fab {
+  position: fixed;
+  z-index: 40;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.fab__toggle,
+.fab__link {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--shadow) 18%, transparent), 0 16px 32px -12px color-mix(in srgb, var(--shadow) 45%, transparent);
+  transition: background-color 0.2s ease;
+}
+
+/* Glass highlight: a slow, endless sweep across each pill. Only its transform moves;
+   the buttons themselves never shift. */
+.fab__toggle::after,
+.fab__link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  background: linear-gradient(105deg, transparent 10%, rgba(255, 255, 255, 0.3) 38%, transparent 50%, rgba(255, 255, 255, 0.15) 64%, transparent 78%);
+  transform: translateX(150%);
+  pointer-events: none;
+  animation: fab-shine 7s ease-in-out infinite;
+}
+
+/* Rest spot -> off the right edge -> back in from the left (both jumps happen off the pill) -> rest */
+@keyframes fab-shine {
+  0% { transform: translateX(150%); animation-timing-function: ease-in; }
+  18% { transform: translateX(260%); animation-timing-function: steps(1, end); }
+  19% { transform: translateX(-130%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  85%,
+  100% { transform: translateX(150%); }
+}
+
+/* Offset the three pills so the shine travels up the stack instead of flashing together */
+.fab__list li:first-child .fab__link::after {
+  animation-delay: -1.4s;
+}
+
+.fab__list li:last-child .fab__link::after {
+  animation-delay: -0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab__toggle::after,
+  .fab__link::after {
+    animation: none !important;
+  }
+}
+
+.fab__toggle {
+  height: 44px;
+  padding: 0 20px 0 16px;
+  background: var(--green-900);
+  color: var(--on-dark);
+  font-size: 16px;
+}
+
+.fab__toggle:hover {
+  background: var(--green-700);
+}
+
+.fab__toggle svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--mint);
+}
+
+.fab__icon-close,
+.fab__toggle[aria-expanded="true"] .fab__icon-chat {
+  display: none;
+}
+
+.fab__toggle[aria-expanded="true"] .fab__icon-close {
+  display: block;
+}
+
+.fab__label {
+  display: none;
+}
+
+/* One column as wide as the wider pill, so both buttons match */
+.fab__list {
+  display: grid;
+  justify-items: stretch;
+  gap: 8px;
+}
+
+.fab__list[hidden] {
+  display: none;
+}
+
+.fab__link {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  padding: 0 20px 0 14px;
+  font-size: 16px;
+}
+
+.fab__link svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fab__link:hover svg {
+  rotate: -10deg;
+  scale: 1.08;
+}
+
+.fab__link--wa {
+  background: #25D366;
+  color: var(--green-900);
+}
+
+.fab__link--wa:hover {
+  background: #1FC05B;
+}
+
+.fab__link--tg {
+  background: var(--tg);
+  color: var(--on-dark);
+}
+
+.fab__link--tg:hover {
+  background: var(--tg-hover);
+}
+
+.fab__toggle:focus-visible,
+.fab__link:focus-visible {
+  outline-offset: 3px;
+}
+
+@media (min-width: 560px) {
+  .fab {
+    right: 24px;
+    bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .fab__label {
+    display: inline;
+  }
+
+  .fab__label-short {
+    display: none;
+  }
+
+  .fab__toggle {
+    height: 48px;
+    padding: 0 26px 0 20px;
+    font-size: 17px;
+  }
+
+  .fab__link {
+    height: 48px;
+    padding: 0 24px 0 16px;
+    font-size: 17px;
+  }
+}
+
+/* ==========================================================================
+   Document pages (terms, privacy, cookies)
+   ========================================================================== */
+/* No rate ticker on these pages */
+.page-doc {
+  --ticker-h: 0px;
+}
+
+.doc-page {
+  padding-block: 24px 80px;
+}
+
+.doc-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 0 -16px 28px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.doc-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.doc-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.doc-tabs__tab:hover {
+  background: var(--tint);
+}
+
+.doc-tabs__tab[aria-current="page"] {
+  background: var(--solid);
+  box-shadow: none;
+  color: var(--on-dark);
+}
+
+.doc[hidden] {
+  display: none;
+}
+
+.doc__head {
+  margin-bottom: 28px;
+}
+
+.doc__title {
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 7vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.doc__meta {
+  margin-top: 12px;
+  color: var(--ink-muted);
+}
+
+.doc__layout {
+  display: grid;
+  gap: 16px;
+}
+
+.doc__toc {
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.doc__toc summary {
+  padding: 16px 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.doc__toc ol {
+  display: grid;
+  padding: 0 12px 12px;
+}
+
+.doc__toc a {
+  display: flex;
+  gap: 10px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.35;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.doc__toc a:hover {
+  background: var(--field);
+  color: var(--ink);
+}
+
+.doc__toc-num {
+  flex-shrink: 0;
+  min-width: 1.6em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* One reading sheet; the measure stays near 70 characters */
+.doc__body {
+  min-width: 0;
+  padding: 24px 20px 32px;
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+  line-height: 1.65;
+}
+
+.doc__body > * {
+  max-width: 70ch;
+}
+
+.doc__intro p,
+.doc__section p {
+  margin-top: 12px;
+}
+
+.doc__intro {
+  padding-bottom: 8px;
+  font-size: 17px;
+}
+
+.doc__intro p:first-child {
+  margin-top: 0;
+}
+
+.doc__section {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+  padding-top: 28px;
+}
+
+.doc__section + .doc__section,
+.doc__intro + .doc__section {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.doc__section h2 {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(19px, 4.6vw, 24px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.doc__h-num {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.doc__num {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.doc__body ul {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.doc__body li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.doc__body li::before {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.doc__body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.doc__body a:hover {
+  text-decoration-thickness: 2px;
+}
+
+@media (min-width: 768px) {
+  .doc-page {
+    padding-top: 40px;
+  }
+
+  .doc__body {
+    padding: 40px 48px 48px;
+  }
+}
+
+/* Desktop: contents stays beside the text while reading */
+@media (min-width: 1024px) {
+  .doc__layout {
+    grid-template-columns: 300px minmax(0, 1fr);
+    align-items: start;
+    gap: 32px;
+  }
+
+  .doc__toc {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    max-height: calc(100vh - var(--header-h) - 48px);
+    overflow-y: auto;
+  }
+
+  .doc__toc summary {
+    pointer-events: none;
+    list-style: none;
+  }
+
+  .doc__toc summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .doc__body {
+    padding: 48px 64px 56px;
+  }
+}
+
+/* ==========================================================================
+   Contact channels
+   ========================================================================== */
+.contact {
+  padding-bottom: 80px;
+}
+
+/* Closing panel in the hero's green, so the page ends where it starts */
+.contact__panel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  gap: 28px;
+  padding: 32px 16px 16px;
+  border-radius: var(--radius-panel);
+  background: var(--green-900);
+  color: var(--on-dark);
+}
+
+/* Same guilloche as the hero, centred on the bottom-left corner */
+.contact__pattern {
+  position: absolute;
+  z-index: -1;
+  width: 720px;
+  height: 720px;
+  left: -360px;
+  bottom: -360px;
+}
+
+.contact__pattern svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.contact__text {
+  padding-inline: 4px;
+}
+
+/* "Online" status the way a messenger shows it */
+.contact__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mint);
+}
+
+.contact__status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3DDC84;
+  box-shadow: 0 0 0 4px rgba(61, 220, 132, 0.2);
+}
+
+.contact__title {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 7vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.contact__list {
+  display: grid;
+  gap: 8px;
+}
+
+.channel {
+  --channel-bg: var(--surface);
+  --channel-ink: var(--on-tint);
+  --channel-icon: var(--green-600);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: var(--channel-bg);
+  color: var(--channel-ink);
+  transition: background-color 0.2s ease;
+}
+
+.channel--app:hover { --channel-bg: var(--tint); }
+
+.channel--tg {
+  --channel-bg: var(--tg);
+  --channel-ink: var(--on-dark);
+  --channel-icon: var(--on-dark);
+}
+
+.channel--tg:hover { --channel-bg: var(--tg-hover); }
+
+.channel--wa {
+  --channel-bg: #25D366;
+  --channel-ink: var(--green-900);
+  --channel-icon: var(--green-900);
+}
+
+.channel--wa:hover { --channel-bg: #1FC05B; }
+
+.channel:focus-visible {
+  outline-color: var(--mint);
+}
+
+.channel__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  color: var(--channel-icon);
+  transition: rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.channel:hover .channel__icon {
+  rotate: -10deg;
+  scale: 1.08;
+}
+
+.channel__label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.channel__verb {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  opacity: 0.8;
+}
+
+.channel__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 640px) {
+  .contact__panel {
+    padding: 40px 32px 32px;
+  }
+
+  .contact__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* Tiles: icon on top, label pinned to the bottom */
+  .channel {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+    min-height: 168px;
+    padding: 20px;
+    border-radius: var(--radius-card);
+  }
+
+  .channel__icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact__panel {
+    gap: 40px;
+    padding: 56px 48px 48px;
+  }
+
+  .contact__pattern {
+    width: 1100px;
+    height: 1100px;
+    left: -550px;
+    bottom: -550px;
+  }
+
+  .channel {
+    min-height: 200px;
+    padding: 24px;
+  }
+
+  .channel__name {
+    font-size: 20px;
+  }
+}
+
+/* Side by side only when each tile has room for "WhatsApp" in display type */
+@media (min-width: 1280px) {
+  .contact__panel {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: center;
+    gap: 48px;
+    padding: 64px 56px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .contact__panel {
+    padding: 72px 80px;
   }
 }
 

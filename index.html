@@ -3,19 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>88 — обмен рублей на баты и донги</title>
+  <title>Ex88.ru — обмен рублей на баты и донги</title>
   <meta name="description" content="Посчитайте обмен рублей, евро, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером.">
   <meta name="theme-color" content="#0B3B2C">
+
+  <!-- Set the theme before the first paint so the page never flashes the wrong colours -->
+  <script>
+    (function () {
+      var theme;
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (theme !== "dark" && theme !== "light") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="icon" href="assets/img/logo.webp" type="image/webp">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/img/logo.webp" type="image/webp">
   <link rel="stylesheet" href="assets/reset.css">
   <link rel="stylesheet" href="assets/style.css">
+
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Нужно ли везти доллары или евро для обмена в Таиланде?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Везти наличные доллары или евро не обязательно. Вы можете перевести рубли с российской карты на другую российскую карту и получить тайские баты в Таиланде через один из 18 офисов, наличными или через банкомат."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Как работает обмен рублей на баты в вашем сервисе?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Вы переводите рубли с вашей российской карты на указанную российскую карту, затем получаете тайские баты в Таиланде через наш офис, бескарточный банкомат или курьерскую доставку."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли обменять рубли на баты без посещения офиса?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, тайские баты можно получить через банкомат по пошаговой инструкции. Банкоматы расположены по всему острову, что делает этот способ быстрым и удобным."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Где располагаются ваши обменные офисы в Таиланде?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Наш головной офис расположен в столице Таиланда — городе Бангкок."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли получить наличные баты с доставкой?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, мы предоставляем курьерскую доставку наличных батов в отели, апартаменты, виллы или любое удобное место."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Как долго ждать баты после перевода рублей?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Получение батов обычно занимает минимальное время после подтверждения перевода, скорость зависит от выбранного способа: офис, банкомат или курьер."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Безопасно ли переводить деньги с карты на карту?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, переводы безопасны: с российской карты на российскую карту, без сомнительных схем, все операции прозрачны."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Какие суммы можно обменять через ваш сервис?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Можно обменять как небольшие суммы на ежедневные расходы, так и крупные суммы на отпуск или длительное пребывание. Конкретные лимиты указываются при оформлении заказа."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Что выгоднее: банкомат, офис или курьер?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Сравнение безопасности и удобства разных способов: банкомат доступен везде, обменный офис надежен и предоставляет персональное обслуживание, курьер обеспечивает максимальный комфорт. Выбор зависит от ваших потребностей."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли оплатить квартиру или виллу в Таиланде из России?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, оплата недвижимости в Таиланде возможна из России и других стран. Сервис помогает конвертировать рубли и обрабатывать платежи в требуемой валюте."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Помогает ли Ex88 с консультацией по застройщикам в Таиланде?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, сервис Ex88 имеет большой опыт работы с тайским рынком и застройщиками, предлагает консультации по практическим нюансам сделок и рискам на этапе оплаты."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Что такое справка Freehold и зачем она нужна?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Справка Freehold — это подтверждение того, что средства на покупку недвижимости были переведены из-за границы, она требуется для регистрации недвижимости в некоторых странах."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Помогает ли Ex88 с оформлением справки Freehold?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, сервис Ex88 помогает с транзакциями по покупке недвижимости и обработкой необходимых сопроводительных документов, включая справку Freehold."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли получить справку Freehold, если покупка оплачивается из России?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, при корректном оформлении платежа и соблюдении требований страны покупки."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Logo mark, drawn once and reused in the header and footer -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="logo-mark" viewBox="0 0 648 618">
+      <circle class="logo__disc" cx="318" cy="323" r="206"/>
+      <g transform="translate(0.000000,618.000000) scale(0.100000,-0.100000)" stroke="none">
+        <g class="logo__arrows"><path d="M3059 5528 c-7 -13 -15 -74 -17 -139 l-4 -115 -132 -18 c-291 -39 -500 -99 -721 -206 -253 -124 -439 -255 -631 -445 -138 -137 -171 -174 -263 -300 -160 -216 -333 -574 -390 -805 -81 -330 -93 -710 -30 -1021 87 -438 327 -887 641 -1199 209 -208 486 -400 576 -400 105 0 175 120 122 207 -21 36 -28 41 -230 173 -199 130 -364 297 -505 515 -149 228 -262 502 -316 765 -22 104 -24 139 -23 375 0 202 4 281 18 355 115 629 536 1199 1096 1484 200 102 434 174 632 195 159 17 154 20 162 -102 9 -134 18 -172 39 -171 15 2 417 247 582 356 44 29 81 60 83 70 3 18 -104 92 -443 305 -248 157 -231 148 -246 121z"/><path d="M4064 5028 c-67 -53 -80 -85 -64 -163 13 -61 18 -66 176 -155 372 -211 663 -521 849 -903 74 -154 95 -210 135 -367 53 -210 73 -374 67 -555 -9 -282 -66 -516 -195 -804 -101 -226 -222 -407 -383 -576 -195 -203 -448 -378 -697 -482 -216 -89 -500 -148 -682 -141 l-85 3 -6 110 c-4 61 -7 125 -8 143 0 18 -6 32 -13 32 -15 0 -248 -130 -501 -280 -194 -115 -204 -127 -144 -166 34 -23 413 -255 557 -342 l85 -51 13 122 c8 67 16 124 18 126 1 2 45 7 96 12 320 31 466 58 651 120 211 71 501 228 652 353 103 85 123 103 233 214 225 226 327 373 477 685 83 173 122 278 158 427 50 205 61 299 61 540 1 249 -15 375 -75 598 -123 466 -406 911 -761 1199 -159 129 -267 201 -401 269 -123 61 -167 68 -213 32z"/></g>
+        <g class="logo__digits"><path d="M2185 3876 c-92 -18 -166 -50 -240 -102 -70 -49 -110 -90 -120 -121 -3 -13 -10 -23 -15 -23 -22 0 -44 -108 -45 -220 0 -113 1 -116 38 -192 37 -77 113 -166 201 -236 22 -17 38 -33 35 -35 -2 -2 -48 -36 -103 -77 -154 -114 -209 -204 -223 -361 -13 -146 34 -276 133 -369 77 -73 110 -92 219 -128 143 -48 357 -67 467 -42 24 5 68 14 99 20 124 24 277 123 338 219 94 146 105 313 32 464 -29 61 -118 156 -201 217 -39 27 -70 57 -70 65 0 8 13 21 28 29 47 24 178 153 192 188 7 18 19 40 25 48 7 8 20 39 30 69 48 147 -4 344 -117 446 -54 49 -167 107 -253 131 -83 22 -355 28 -450 10z m325 -336 c57 -45 74 -82 74 -160 0 -54 -4 -72 -27 -108 -44 -68 -143 -130 -189 -118 -31 7 -122 88 -149 132 -41 66 -21 194 37 245 45 39 78 50 146 46 57 -4 73 -9 108 -37z m-43 -826 c103 -69 170 -178 157 -253 -22 -120 -118 -194 -251 -194 -82 1 -154 39 -200 107 -28 41 -33 57 -33 109 0 101 37 156 164 241 55 37 95 34 163 -10z"/><path d="M3790 3883 c-136 -21 -257 -78 -341 -162 -75 -76 -105 -133 -125 -240 -18 -94 -8 -153 46 -266 39 -81 71 -118 194 -222 57 -47 55 -58 -17 -95 -61 -31 -180 -159 -222 -239 -43 -83 -55 -174 -36 -285 32 -184 205 -345 419 -389 100 -21 413 -20 501 0 35 9 75 21 90 29 14 7 52 25 84 41 68 33 169 136 199 204 11 25 25 54 29 63 5 10 9 74 10 143 1 117 -1 129 -26 181 -37 76 -115 167 -188 220 -72 52 -107 83 -107 94 0 5 9 12 20 15 29 9 124 95 166 149 85 111 115 226 96 365 -36 258 -268 403 -637 400 -71 -1 -141 -3 -155 -6z m225 -314 c86 -24 144 -122 130 -218 -14 -90 -115 -191 -193 -191 -38 0 -108 39 -140 79 -40 50 -54 95 -50 160 4 81 30 120 102 156 55 27 90 31 151 14z m16 -849 c89 -46 168 -154 169 -231 0 -54 -27 -122 -63 -157 -104 -100 -324 -75 -400 47 -18 29 -22 49 -20 107 0 42 7 84 17 101 19 38 96 106 160 143 53 31 57 30 137 -10z"/></g>
+      </g>
+    </symbol>
+  </svg>
 
   <header class="site-header" id="site-header">
     <div class="ticker">
@@ -31,9 +176,9 @@
 
     <div class="container header__inner">
       <a href="/" class="logo">
-        <img src="assets/img/logo.webp" alt="" width="44" height="44">
+        <svg class="logo__mark" viewBox="0 0 648 618" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
         <span class="logo__text">
-          <span class="logo__name">88</span>
+          <span class="logo__name" translate="no">Ex88.ru</span>
           <span class="logo__caption" data-i18n="caption">обмен валют</span>
         </span>
       </a>
@@ -49,9 +194,9 @@
         </div>
 
         <nav class="nav" aria-label="Основная навигация" data-i18n-aria="navLabel">
-          <a href="#calculator" data-i18n="navExchange">Обмен</a>
-          <a href="#" data-i18n="navTransfers">Переводы</a>
-          <a href="#" data-i18n="navContacts">Контакты</a>
+          <a href="#exchange" data-i18n="navExchange">Обмен</a>
+          <a href="#receive" data-i18n="navTransfers">Переводы</a>
+          <a href="#contacts" data-i18n="navContacts">Контакты</a>
         </nav>
 
         <div class="country-switch lang-switch" data-switch="language" role="group" aria-label="Язык сайта" data-i18n-aria="langGroup">
@@ -60,8 +205,15 @@
         </div>
       </div>
 
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Тёмная тема" data-i18n-aria="themeDark">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path class="theme-toggle__moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <g class="theme-toggle__sun" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g>
+        </svg>
+      </button>
+
       <a href="#" class="header__tg" id="header-tg">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="currentColor"/></svg>
+        <svg viewBox="0 0 41 35" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
         <span class="header__tg-label" data-i18n="tgWrite">Написать в Telegram</span>
       </a>
 
@@ -74,11 +226,11 @@
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" id="exchange">
       <div class="container">
         <div class="hero__panel">
           <div class="hero__pattern" aria-hidden="true">
-            <svg class="hero__pattern-svg" id="guilloche" focusable="false"></svg>
+            <svg class="hero__pattern-svg" data-guilloche focusable="false"></svg>
           </div>
 
           <div class="hero__text">
@@ -130,7 +282,7 @@
             <p class="calculator__rate" id="rate-line"></p>
 
             <a href="#" class="btn btn--tg btn--block" id="submit-btn">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 41 35" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
               <span data-i18n="submit">Продолжить в Telegram</span>
             </a>
             <p class="calculator__hint" data-i18n="calcHint">Откроется чат с менеджером, сумма и&nbsp;валюты подставятся сами</p>
@@ -173,11 +325,59 @@
       </div>
     </section>
 
+    <section class="receive" id="receive" aria-labelledby="receive-title">
+      <div class="container">
+        <div class="receive__head">
+          <h2 class="receive__title" id="receive-title" data-i18n="receiveTitle">Способы получения</h2>
+          <p class="receive__lead" data-i18n="receiveLead">Скажите менеджеру в&nbsp;Telegram, как вам удобнее, и&nbsp;мы подготовим обмен под этот способ</p>
+        </div>
+        <ul class="receive__list">
+          <li class="receive__item receive__item--office">
+            <img class="receive__img" src="assets/img/receive/office-400.webp" srcset="assets/img/receive/office-400.webp 400w, assets/img/receive/office-800.webp 800w" sizes="(min-width: 1024px) 400px, 50vw" alt="" width="400" height="320" loading="lazy" decoding="async">
+            <h3 class="receive__name" data-i18n="receiveOffice">Наличные в&nbsp;офисе</h3>
+            <p class="receive__text" data-i18n="receiveOfficeText">Приходите в&nbsp;наш офис и&nbsp;забираете баты или донги</p>
+          </li>
+          <li class="receive__item receive__item--delivery">
+            <img class="receive__img" src="assets/img/receive/delivery-400.webp" srcset="assets/img/receive/delivery-400.webp 400w, assets/img/receive/delivery-800.webp 800w" sizes="(min-width: 1024px) 400px, 50vw" alt="" width="400" height="320" loading="lazy" decoding="async">
+            <span class="receive__tag"><span aria-hidden="true">🇹🇭</span> <span data-i18n="receiveOnlyTH">Только в&nbsp;Таиланде</span></span>
+            <h3 class="receive__name" data-i18n="receiveDelivery">Доставка</h3>
+            <p class="receive__text" data-i18n="receiveDeliveryText">Курьер привезёт наличные к&nbsp;отелю или вилле</p>
+          </li>
+          <li class="receive__item receive__item--atm">
+            <img class="receive__img" src="assets/img/receive/atm-400.webp" srcset="assets/img/receive/atm-400.webp 400w, assets/img/receive/atm-800.webp 800w" sizes="(min-width: 1024px) 400px, 50vw" alt="" width="400" height="320" loading="lazy" decoding="async">
+            <h3 class="receive__name" data-i18n="receiveAtm">Банкомат без карты</h3>
+            <p class="receive__text" data-i18n="receiveAtmText">Снимаете наличные по&nbsp;коду, карта не&nbsp;нужна</p>
+          </li>
+          <li class="receive__item receive__item--qr">
+            <img class="receive__img" src="assets/img/receive/qr-400.webp" srcset="assets/img/receive/qr-400.webp 400w, assets/img/receive/qr-800.webp 800w" sizes="(min-width: 1024px) 400px, 50vw" alt="" width="400" height="320" loading="lazy" decoding="async">
+            <h3 class="receive__name" data-i18n="receiveQr">Перевод по&nbsp;QR</h3>
+            <p class="receive__text" data-i18n="receiveQrText">Отправим деньги на&nbsp;местный банковский счёт или по&nbsp;QR-коду</p>
+          </li>
+          <li class="receive__item receive__item--bills">
+            <img class="receive__img" src="assets/img/receive/bills-400.webp" srcset="assets/img/receive/bills-400.webp 400w, assets/img/receive/bills-800.webp 800w" sizes="(min-width: 1024px) 400px, 50vw" alt="" width="400" height="320" loading="lazy" decoding="async">
+            <h3 class="receive__name" data-i18n="receiveBills">Оплата услуг и&nbsp;счетов</h3>
+            <p class="receive__text" data-i18n="receiveBillsText">Оплатим аренду, коммунальные услуги и&nbsp;другие счета за&nbsp;вас</p>
+          </li>
+          <li class="receive__item receive__item--usd">
+            <img class="receive__img" src="assets/img/receive/usd-400.webp" srcset="assets/img/receive/usd-400.webp 400w, assets/img/receive/usd-800.webp 800w" sizes="(min-width: 1024px) 400px, 50vw" alt="" width="400" height="320" loading="lazy" decoding="async">
+            <h3 class="receive__name" data-i18n="receiveUsd">Доллары онлайн</h3>
+            <p class="receive__text" data-i18n="receiveUsdText">Получаете доллары США безналичным переводом</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <section class="reviews" aria-labelledby="reviews-title">
       <div class="container">
         <div class="reviews__head">
           <h2 class="reviews__title" id="reviews-title" data-i18n="reviewsTitle">Отзывы клиентов</h2>
           <div class="reviews__controls">
+            <button type="button" class="reviews__arrow reviews__auto" id="reviews-auto" aria-label="Остановить автопрокрутку отзывов">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path class="reviews__icon-pause" d="M9 6.5v11M15 6.5v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                <path class="reviews__icon-play" d="M8.5 6.3v11.4a.6.6 0 0 0 .9.5l9-5.7a.6.6 0 0 0 0-1l-9-5.7a.6.6 0 0 0-.9.5Z" fill="currentColor"/>
+              </svg>
+            </button>
             <button type="button" class="reviews__arrow" id="reviews-prev" aria-label="Предыдущие отзывы" data-i18n-aria="reviewsPrev">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -188,10 +388,247 @@
         </div>
 
         <ul class="reviews__track" id="reviews-track" tabindex="0" aria-label="Отзывы клиентов" data-i18n-aria="reviewsTitle"></ul>
-        <div class="reviews__dots" id="reviews-dots"></div>
+      </div>
+    </section>
+
+    <section class="offices" id="offices" aria-labelledby="offices-title">
+      <div class="container">
+        <h2 class="offices__title" id="offices-title" data-i18n="officesTitle">Офисы обмена</h2>
+        <div class="offices__panel">
+          <div class="offices__side">
+            <div class="offices__tabs" id="office-tabs" role="tablist" aria-label="Офисы" data-i18n-aria="officesList"></div>
+            <article class="office" id="office-panel" role="tabpanel">
+              <h3 class="office__name" id="office-name" translate="no">Si Phraya</h3>
+              <p class="office__floor" id="office-place" translate="no">Ex88 BangRak</p>
+              <address class="office__address" id="office-address">362/5 Si Phraya Rd, Maha Phruttharam, Bang Rak, Бангкок 10500, Таиланд</address>
+              <div class="office__actions">
+                <a class="btn btn--primary office__route" id="office-route" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.7317149,100.5236788" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/></svg>
+                  <span data-i18n="officeRoute">Проложить маршрут</span>
+                </a>
+                <button type="button" class="office__copy" id="office-copy" data-address="362/5 Si Phraya Rd, Maha Phruttharam, Bang Rak, Bangkok 10500, Thailand">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" stroke="currentColor" stroke-width="2"/></svg>
+                  <span id="office-copy-label" data-i18n="officeCopy">Скопировать адрес</span>
+                </button>
+              </div>
+              <p class="visually-hidden" id="office-copy-status" aria-live="polite"></p>
+            </article>
+          </div>
+          <div class="offices__map">
+            <iframe id="office-map" src="https://maps.google.com/maps?q=Ex88%2C%20362%2F5%20Si%20Phraya%20Rd%2C%20Bangkok&amp;z=16&amp;hl=ru&amp;output=embed" title="Карта офиса: Si Phraya" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq__inner">
+        <div class="faq__panel">
+          <div class="faq__intro">
+            <h2 class="faq__title" id="faq-title" data-i18n="faqTitle">Частые вопросы</h2>
+            <p class="faq__lead" data-i18n="faqLead">Как перевести рубли, получить баты и&nbsp;оплатить недвижимость в&nbsp;Таиланде</p>
+          </div>
+          <div class="faq__group" role="group" aria-labelledby="faq-exchange">
+            <h3 class="faq__group-title" id="faq-exchange" data-i18n="faqGroupExchange">Обмен и&nbsp;получение денег</h3>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ1">Нужно ли&nbsp;везти доллары или евро для обмена в&nbsp;Таиланде?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA1">Везти наличные доллары или евро не&nbsp;обязательно. Вы&nbsp;можете перевести рубли с&nbsp;российской карты на&nbsp;другую российскую карту и&nbsp;получить тайские баты в&nbsp;Таиланде через один из&nbsp;18 офисов, наличными или через банкомат.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ2">Как работает обмен рублей на&nbsp;баты в&nbsp;вашем сервисе?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA2">Вы&nbsp;переводите рубли с&nbsp;вашей российской карты на&nbsp;указанную российскую карту, затем получаете тайские баты в&nbsp;Таиланде через наш офис, бескарточный банкомат или курьерскую доставку.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ3">Можно ли&nbsp;обменять рубли на&nbsp;баты без посещения офиса?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA3">Да, тайские баты можно получить через банкомат по&nbsp;пошаговой инструкции. Банкоматы расположены по&nbsp;всему острову, что делает этот способ быстрым и&nbsp;удобным.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ4">Где располагаются ваши обменные офисы в&nbsp;Таиланде?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA4">Наш головной офис расположен в&nbsp;столице Таиланда — городе Бангкок.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ5">Можно ли&nbsp;получить наличные баты с&nbsp;доставкой?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA5">Да, мы&nbsp;предоставляем курьерскую доставку наличных батов в&nbsp;отели, апартаменты, виллы или любое удобное место.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ6">Как долго ждать баты после перевода рублей?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA6">Получение батов обычно занимает минимальное время после подтверждения перевода, скорость зависит от&nbsp;выбранного способа: офис, банкомат или курьер.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ7">Безопасно ли&nbsp;переводить деньги с&nbsp;карты на&nbsp;карту?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA7">Да, переводы безопасны: с&nbsp;российской карты на&nbsp;российскую карту, без сомнительных схем, все операции прозрачны.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ8">Какие суммы можно обменять через ваш сервис?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA8">Можно обменять как небольшие суммы на&nbsp;ежедневные расходы, так и&nbsp;крупные суммы на&nbsp;отпуск или длительное пребывание. Конкретные лимиты указываются при оформлении заказа.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ9">Что выгоднее: банкомат, офис или курьер?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA9">Сравнение безопасности и&nbsp;удобства разных способов: банкомат доступен везде, обменный офис надежен и&nbsp;предоставляет персональное обслуживание, курьер обеспечивает максимальный комфорт. Выбор зависит от&nbsp;ваших потребностей.</p>
+            </details>
+          </div>
+          <div class="faq__group" role="group" aria-labelledby="faq-property">
+            <h3 class="faq__group-title" id="faq-property" data-i18n="faqGroupProperty">Недвижимость в&nbsp;Таиланде</h3>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ10">Можно ли&nbsp;оплатить квартиру или виллу в&nbsp;Таиланде из&nbsp;России?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA10">Да, оплата недвижимости в&nbsp;Таиланде возможна из&nbsp;России и&nbsp;других стран. Сервис помогает конвертировать рубли и&nbsp;обрабатывать платежи в&nbsp;требуемой валюте.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ11">Помогает ли&nbsp;Ex88 с&nbsp;консультацией по&nbsp;застройщикам в&nbsp;Таиланде?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA11">Да, сервис Ex88 имеет большой опыт работы с&nbsp;тайским рынком и&nbsp;застройщиками, предлагает консультации по&nbsp;практическим нюансам сделок и&nbsp;рискам на&nbsp;этапе оплаты.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ12">Что такое справка Freehold и&nbsp;зачем она нужна?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA12">Справка Freehold — это подтверждение того, что средства на&nbsp;покупку недвижимости были переведены из-за&nbsp;границы, она требуется для регистрации недвижимости в&nbsp;некоторых странах.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ13">Помогает ли&nbsp;Ex88 с&nbsp;оформлением справки Freehold?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA13">Да, сервис Ex88 помогает с&nbsp;транзакциями по&nbsp;покупке недвижимости и&nbsp;обработкой необходимых сопроводительных документов, включая справку Freehold.</p>
+            </details>
+            <details class="faq__item">
+              <summary class="faq__q"><span data-i18n="faqQ14">Можно ли&nbsp;получить справку Freehold, если покупка оплачивается из&nbsp;России?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+              <p class="faq__a" data-i18n="faqA14">Да, при корректном оформлении платежа и&nbsp;соблюдении требований страны покупки.</p>
+            </details>
+          </div>
+        </div>
+        <div class="faq__aside">
+          <div class="faq__ask">
+            <div class="faq__ask-pattern" aria-hidden="true">
+              <svg data-guilloche focusable="false"></svg>
+            </div>
+            <p class="visually-hidden" data-i18n="faqAskQuestion">Не нашли ответ?</p>
+            <!-- Decorative chat that plays a short conversation in a loop (filled by JS) -->
+            <div class="faq__chat" aria-hidden="true">
+              <div class="faq__chat-list" id="faq-chat"></div>
+            </div>
+            <p class="faq__ask-text" data-i18n="faqAskNote">Менеджер ответит в&nbsp;чате</p>
+            <a href="#" class="btn btn--tg btn--block" id="faq-tg">
+              <svg viewBox="0 0 41 35" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
+              <span data-i18n="faqAskBtn">Спросить в&nbsp;Telegram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacts" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact__panel">
+          <div class="contact__pattern" aria-hidden="true">
+            <svg data-guilloche focusable="false"></svg>
+          </div>
+          <div class="contact__text">
+            <p class="contact__status" data-i18n="contactStatus">Наши менеджеры онлайн 24/7</p>
+            <h2 class="contact__title" id="contact-title" data-i18n="contactTitle">Выберите удобный способ обмена</h2>
+          </div>
+          <ul class="contact__list">
+            <li>
+              <a href="#" class="channel channel--app" id="contact-app">
+                <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><rect x="8" y="5" width="8" height="14" rx="2" fill="none" stroke="var(--channel-bg)" stroke-width="1.8"/><path d="M11 16.2h2" stroke="var(--channel-bg)" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span class="channel__label">
+                  <span class="channel__verb" data-i18n="contactGo">Перейти</span>
+                  <span class="channel__name" data-i18n="contactApp">в&nbsp;приложение</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="channel channel--tg" id="contact-tg">
+                <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path transform="translate(5.7 7) scale(0.29)" fill-rule="evenodd" clip-rule="evenodd" fill="var(--channel-bg)" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
+                <span class="channel__label">
+                  <span class="channel__verb" data-i18n="contactExchange">Обменять</span>
+                  <span class="channel__name" data-i18n="contactTg">в&nbsp;Telegram</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="channel channel--wa" id="contact-wa">
+                <svg class="channel__icon" viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M54.47 9.47A31.3 31.3 0 0 0 32.22.25 31.5 31.5 0 0 0 4.96 47.42L.5 63.72l16.67-4.37a31.5 31.5 0 0 0 15.03 3.83h.02a31.5 31.5 0 0 0 31.45-31.46c0-8.4-3.27-16.3-9.2-22.25M19.44 32.85c-.39-.52-3.2-4.26-3.2-8.12 0-3.87 2.03-5.77 2.75-6.56a3 3 0 0 1 2.1-.98q.8 0 1.5.02c.48.03 1.13-.18 1.77 1.35.65 1.58 2.22 5.45 2.42 5.84.2.4.33.85.06 1.37-.26.53-.39.86-.78 1.32-.4.45-.83 1.02-1.18 1.37-.4.4-.8.82-.34 1.6.45.8 2.03 3.37 4.37 5.45 3 2.68 5.53 3.5 6.32 3.9.78.4 1.24.33 1.7-.2.46-.52 1.96-2.29 2.49-3.08.52-.78 1.05-.65 1.77-.39s4.58 2.16 5.37 2.56c.78.39 1.3.59 1.5.91s.2 1.9-.46 3.74c-.65 1.84-3.8 3.51-5.3 3.74-1.36.2-3.07.29-4.95-.31a48 48 0 0 1-4.48-1.66c-7.88-3.4-13.03-11.34-13.43-11.87"/></svg>
+                <span class="channel__label">
+                  <span class="channel__verb" data-i18n="contactExchange">Обменять</span>
+                  <span class="channel__name" data-i18n="contactWa">в&nbsp;WhatsApp</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="/" class="logo">
+            <svg class="logo__mark" viewBox="0 0 648 618" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
+            <span class="logo__text">
+              <span class="logo__name" translate="no">Ex88.ru</span>
+              <span class="logo__caption" data-i18n="caption">обмен валют</span>
+            </span>
+          </a>
+          <p class="footer__about" data-i18n="footerAbout">Обмен рублей на&nbsp;тайские баты и&nbsp;вьетнамские донги с&nbsp;2016 года</p>
+        </div>
+
+        <nav class="footer__col" aria-labelledby="footer-nav-title">
+          <h2 class="footer__heading" id="footer-nav-title" data-i18n="footerNav">Разделы</h2>
+          <ul class="footer__links">
+            <li><a href="#exchange" data-i18n="navExchange">Обмен</a></li>
+            <li><a href="#receive" data-i18n="receiveTitle">Способы получения</a></li>
+            <li><a href="#offices" data-i18n="officesTitle">Офисы обмена</a></li>
+            <li><a href="#faq" data-i18n="faqTitle">Частые вопросы</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__col">
+          <h2 class="footer__heading" data-i18n="footerContact">Связаться</h2>
+          <ul class="footer__links">
+            <li><a href="#" id="footer-tg">Telegram</a></li>
+            <li><a href="#" id="footer-wa">WhatsApp</a></li>
+            <li><a href="#" id="footer-app" data-i18n="footerApp">Приложение</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__legal">
+          <h2 class="footer__heading" data-i18n="footerCompany">Компания</h2>
+          <p class="footer__company" translate="no">SATANG DANG &amp; CO COMPANY LIMITED</p>
+          <p><span data-i18n="footerLicense">Лицензия</span> <span translate="no">MC225670140</span></p>
+          <address translate="no">362/5 Si Phraya Rd, Maha Phruttharam, Bang Rak, Bangkok</address>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2016–<span id="footer-year">2026</span> Ex88</p>
+        <ul class="footer__docs">
+          <li><a href="terms.html" data-i18n="footerTerms">Условия пользования</a></li>
+          <li><a href="privacy.html" data-i18n="footerPrivacy">Политика конфиденциальности</a></li>
+          <li><a href="cookies.html" data-i18n="footerCookies">Политика cookie</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fab" id="fab">
+    <button type="button" class="fab__toggle" id="fab-toggle" aria-expanded="false" aria-controls="fab-list">
+      <svg class="fab__icon-chat" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.6c-.5.4-1.3.1-1.3-.6V16A2.5 2.5 0 0 1 4 13.5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 9.5h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="fab__icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span class="fab__label" data-i18n="fabLabel">Связаться с&nbsp;менеджером</span>
+      <span class="fab__label-short" data-i18n="fabLabelShort">Менеджер</span>
+    </button>
+    <ul class="fab__list" id="fab-list" hidden>
+      <li>
+        <a href="#" class="fab__link fab__link--wa" id="fab-wa">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M54.47 9.47A31.3 31.3 0 0 0 32.22.25 31.5 31.5 0 0 0 4.96 47.42L.5 63.72l16.67-4.37a31.5 31.5 0 0 0 15.03 3.83h.02a31.5 31.5 0 0 0 31.45-31.46c0-8.4-3.27-16.3-9.2-22.25M19.44 32.85c-.39-.52-3.2-4.26-3.2-8.12 0-3.87 2.03-5.77 2.75-6.56a3 3 0 0 1 2.1-.98q.8 0 1.5.02c.48.03 1.13-.18 1.77 1.35.65 1.58 2.22 5.45 2.42 5.84.2.4.33.85.06 1.37-.26.53-.39.86-.78 1.32-.4.45-.83 1.02-1.18 1.37-.4.4-.8.82-.34 1.6.45.8 2.03 3.37 4.37 5.45 3 2.68 5.53 3.5 6.32 3.9.78.4 1.24.33 1.7-.2.46-.52 1.96-2.29 2.49-3.08.52-.78 1.05-.65 1.77-.39s4.58 2.16 5.37 2.56c.78.39 1.3.59 1.5.91s.2 1.9-.46 3.74c-.65 1.84-3.8 3.51-5.3 3.74-1.36.2-3.07.29-4.95-.31a48 48 0 0 1-4.48-1.66c-7.88-3.4-13.03-11.34-13.43-11.87"/></svg>
+          WhatsApp
+        </a>
+      </li>
+      <li>
+        <a href="#" class="fab__link fab__link--tg" id="fab-tg">
+          <svg viewBox="0 0 41 35" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
+          Telegram
+        </a>
+      </li>
+    </ul>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>
