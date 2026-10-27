@@ -1,0 +1,8 @@
+# Netlify builds the production site from the sources; redirects and headers come from
+# dist/_redirects and dist/_headers, written by the build.
+[build]
+  command = "node scripts/build.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

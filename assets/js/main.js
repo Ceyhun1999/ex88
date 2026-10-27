@@ -1,10 +1,9 @@
 (function () {
   "use strict";
 
-  const BOT_USERNAME = "REPLACE_WITH_BOT_USERNAME";
-  const BOT_URL = "https://t.me/" + BOT_USERNAME;
+  const BOT_URL = "https://t.me/Ex88ru_bot/start-1";
   const WHATSAPP_NUMBER = "REPLACE_WITH_WHATSAPP_NUMBER";
-  const APP_URL = "REPLACE_WITH_APP_URL";
+  const APP_URL = "https://t.me/Ex88ru_bot?start=13FF-98E5";
 
   /* Languages */
   const I18N = {
@@ -115,8 +114,11 @@
       VND: "Вьетнамский донг",
       USD_ONLINE: "Доллары США онлайн",
       rateLoading: "Загружаем курс…",
+      ratesFrom: "от",
       rateError: "Курс временно недоступен. Менеджер назовёт его в\u00a0чате",
       rateMin: "Минимальная сумма —",
+      payRounded: "Банкомат выдаёт суммы, кратные",
+      payRoundedTail: "— сумма к\u00a0оплате пересчитана",
       receiveMethod: "Как получить",
       acceptTitle: "Мы принимаем рубли и\u00a0другие виды валют",
       bankSbp: "СБП",
@@ -255,6 +257,9 @@
       rateLoading: "Loading the rate…",
       rateError: "The rate is unavailable right now. A manager will give it to you in the chat",
       rateMin: "Minimum amount:",
+      payRounded: "ATMs pay out in multiples of",
+      payRoundedTail: "— the amount to pay has been recalculated",
+      ratesFrom: "from",
       receiveMethod: "How to receive",
       acceptTitle: "We accept rubles and\u00a0other currencies",
       bankSbp: "SBP",
@@ -451,11 +456,23 @@
     },
   ];
 
+  // Built pages (/ru, /en, /ru/terms…) have one language each, named in their hreflang links;
+  // the language switch moves between those URLs. Without them (the sources) it switches in place.
+  const langUrls = {};
+  document.querySelectorAll('link[rel="alternate"][hreflang="ru"], link[rel="alternate"][hreflang="en"]').forEach((link) => {
+    langUrls[link.hreflang] = new URL(link.href).pathname;
+  });
+  const langPinned = Boolean(langUrls.ru && langUrls.en);
+
   let lang = "ru";
-  try {
-    const saved = localStorage.getItem("ex88-lang");
-    if (saved === "ru" || saved === "en") lang = saved;
-  } catch (e) {}
+  if (langPinned) {
+    lang = document.documentElement.lang === "en" ? "en" : "ru";
+  } else {
+    try {
+      const saved = localStorage.getItem("ex88-lang");
+      if (saved === "ru" || saved === "en") lang = saved;
+    } catch (e) {}
+  }
 
   const t = (key) => I18N[lang][key];
   const numberLocale = () => (lang === "en" ? "en-US" : "ru-RU");
@@ -541,7 +558,8 @@
     siteHeader.classList.toggle("is-scrolled", window.scrollY > 4);
   }
   window.addEventListener("scroll", updateHeaderShadow, { passive: true });
-  updateHeaderShadow();
+  // First check in the next frame: reading scrollY now would force a layout during startup
+  requestAnimationFrame(updateHeaderShadow);
 
   /* In-page links: smooth scroll that stops just below the sticky header (measured, so it
      also holds on phones), instant with reduced motion. Focus moves to the block for
@@ -612,6 +630,10 @@
       try {
         localStorage.setItem("ex88-lang", lang);
       } catch (e) {}
+      if (langPinned) {
+        location.href = langUrls[lang] + location.hash;
+        return;
+      }
       applyCommon();
       applyPage();
     });
@@ -1036,7 +1058,10 @@
   // pairs: [{ from, to, order, rounded, step, methods: [{ id, title, time }], ranges: [{ min, max, fromRate, toRate, method }] }]
   let pairs = [];
   let ratesStatus = "loading"; // "loading" | "ready" | "error"
-  const state = { from: "RUB", to: "THB", amountFrom: 50000, method: null };
+  // requested: the amount the visitor chose; amountFrom: what they pay, which can be
+  // lowered when a receive method rounds the payout (ATMs give multiples of 100 THB)
+  const state = { from: "RUB", to: "THB", amountFrom: 50000, requested: 50000, method: null };
+  let pendingPay = null;
   const receiveMethodBox = document.getElementById("receive-method");
   const receiveMethodOptions = document.getElementById("receive-method-options");
 
@@ -1059,6 +1084,7 @@
           .sort((a, b) => a.order - b.order)
           .map((m) => ({
             id: m.id,
+            rounded: Boolean(m.rounded),
             title: { ru: m.title, en: m.titleEn || m.title },
             time: { ru: m.time, en: m.timeEn || m.time },
           })),
@@ -1096,8 +1122,32 @@
       range = status === "below" ? sorted[0] : sorted[sorted.length - 1];
     }
     let value = (amount * range.toRate) / range.fromRate;
-    if (pair.rounded && pair.step > 0) value = Math.floor(value / pair.step) * pair.step;
-    return { value, range, status, pair };
+    // Rounding belongs to the receive method (only ATMs), always down, like the server
+    const m = pair.methods.find((x) => x.id === method);
+    const rounds = Boolean(m && m.rounded && pair.step > 0);
+    if (rounds) value = Math.floor(value / pair.step) * pair.step;
+    return { value, range, status, pair, rounded: rounds, step: pair.step };
+  }
+
+  /* With a rounding method (ATM) the server lowers the payment to match the rounded payout
+     and returns it as fromAmount. The site always asks with the amount the visitor chose,
+     never with the lowered one: asking again with 29 868 would round down once more. While
+     the visitor is typing, the new amount waits until they leave the field. */
+  function applyPay(pay) {
+    if (!(pay > 0) || pay === state.amountFrom) return;
+    if (document.activeElement === amountFromInput) {
+      pendingPay = { pay, requested: state.requested };
+      return;
+    }
+    pendingPay = null;
+    state.amountFrom = pay;
+    amountFromInput.value = formatNumber(pay, cur(state.from).decimals);
+    updateBotLink();
+  }
+
+  function roundingNote(step) {
+    return '<span class="calculator__rate-note">' + t("payRounded") + " " + formatNumber(step, 0) + " " +
+      cur(state.to).code + " " + t("payRoundedTail") + "</span>";
   }
 
   // Both directions on one line: people read the rate both ways (2,61 as well as 0,383)
@@ -1194,7 +1244,7 @@
       btn.innerHTML =
         '<span class="rates__pair"><span class="rates__flags" aria-hidden="true">' +
         cur(from).flag + cur(to).flag + "</span>" + cur(from).code + " " + t("pairTo") + " " + cur(to).code + "</span>" +
-        '<span class="rates__value">' + formatRate(value) +
+        '<span class="rates__value">' + t("ratesFrom") + "\u00a0" + formatRate(value) +
         "<small>" + (unitIsTo ? cur(from).code : cur(to).code) + " " + t("per") + " 1 " +
         (unitIsTo ? cur(to).code : cur(from).code) + "</small></span>";
       btn.addEventListener("click", () => {
@@ -1281,11 +1331,19 @@
     rateLine.classList.toggle("is-warning", Boolean(isWarning));
   }
 
-  function recalc() {
+  // Bot deep link: FROM_TO_AMOUNT_METHOD, the amount being what the visitor pays (lowered for
+  // ATMs). The bot does not recalculate, it passes this on to the operator.
+  // Telegram allows A-Z, a-z, 0-9, _ and - in the start parameter, up to 64 characters.
+  function updateBotLink() {
     const params = new URLSearchParams({
-      start: cur(state.from).code + "_" + cur(state.to).code + "_" + Math.round(state.amountFrom),
+      start: [cur(state.from).code, cur(state.to).code, Math.round(state.amountFrom), state.method]
+        .filter(Boolean).join("_").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64),
     });
     submitBtn.href = BOT_URL + "?" + params.toString();
+  }
+
+  function recalc() {
+    updateBotLink();
     swapBtn.disabled = ratesStatus === "ready" && !findPair(state.to, state.from);
 
     const loading = ratesStatus === "loading";
@@ -1303,11 +1361,12 @@
     }
 
     // Instant estimate from the rates, then the server's own calculation replaces it
-    const q = quote(state.amountFrom, state.from, state.to, state.method);
+    const q = quote(state.requested, state.from, state.to, state.method);
     if (q.status === "below") showMinimum(pairMin(q.pair, state.method));
     else {
       setResult(q.value);
       showRates(state.from, state.to, q.range);
+      if (q.rounded && state.amountFrom < state.requested) rateLine.insertAdjacentHTML("beforeend", roundingNote(q.step));
     }
     syncRatesList();
     scheduleServerQuote();
@@ -1328,36 +1387,46 @@
   function scheduleServerQuote() {
     clearTimeout(calcTimer);
     if (calcController) calcController.abort();
-    if (!(state.amountFrom > 0)) return;
+    if (!(state.requested > 0)) return;
     calcTimer = setTimeout(serverQuote, 300);
   }
 
+  function calcRequest(from, to, amount, method, signal) {
+    return fetch(CALC_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        fromCurrency: from,
+        toCurrency: to,
+        amount,
+        amountCurrency: from,
+        receiveMethodId: method || undefined,
+      }),
+      signal,
+    });
+  }
+
   async function serverQuote() {
-    const asked = { from: state.from, to: state.to, amount: state.amountFrom, method: state.method };
+    const asked = { from: state.from, to: state.to, amount: state.requested, method: state.method };
     calcController = new AbortController();
     try {
-      const res = await fetch(CALC_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          fromCurrency: asked.from,
-          toCurrency: asked.to,
-          amount: asked.amount,
-          amountCurrency: asked.from,
-          receiveMethodId: asked.method || undefined,
-        }),
-        signal: calcController.signal,
-      });
+      const res = await calcRequest(asked.from, asked.to, asked.amount, asked.method, calcController.signal);
       const data = await res.json();
       const stillCurrent = asked.from === state.from && asked.to === state.to &&
-        asked.amount === state.amountFrom && asked.method === state.method;
+        asked.amount === state.requested && asked.method === state.method;
       if (!stillCurrent) return;
       if (res.ok && typeof data.toAmount === "number") {
         rateLine.classList.remove("is-warning");
         if (Math.abs(data.toAmount - lastResult) > 0.004) setResult(data.toAmount);
         const fromRate = parseFloat(data.rateFromAmount);
         const toRate = parseFloat(data.rateToAmount);
-        if (fromRate > 0 && toRate > 0) showRates(asked.from, asked.to, { fromRate, toRate });
+        if (fromRate > 0 && toRate > 0) {
+          const range = { fromRate, toRate };
+          showRates(asked.from, asked.to, range);
+          const pay = data.rounded && data.fromAmount > 0 ? data.fromAmount : asked.amount;
+          applyPay(pay);
+          if (pay < asked.amount) rateLine.insertAdjacentHTML("beforeend", roundingNote(data.roundingStep));
+        }
       } else if (res.status === 400 && /minimum/i.test(data.message || "")) {
         const fromMessage = parseFloat((data.message.match(/[\d.]+/) || [])[0]);
         const pair = findPair(asked.from, asked.to);
@@ -1399,6 +1468,9 @@
   receiveMethodOptions.addEventListener("change", (e) => {
     if (e.target.name !== "receive-method") return;
     state.method = e.target.value;
+    // Back to the amount the visitor chose; a rounding method lowers it again if needed
+    state.amountFrom = state.requested;
+    amountFromInput.value = formatNumber(state.amountFrom, cur(state.from).decimals);
     rollNext = true;
     recalc();
     flashResult();
@@ -1424,7 +1496,7 @@
       else from = pairs.find((p) => p.to === to)?.from || pairs[0].from;
     }
     if (amount === undefined && from !== state.from) amount = defaultAmount(from, to);
-    if (amount !== undefined) state.amountFrom = amount;
+    if (amount !== undefined) state.amountFrom = state.requested = amount;
     state.from = from;
     state.to = to;
     if (ratesStatus === "ready") syncMethod();
@@ -1483,11 +1555,17 @@
     const parts = raw.split(decimalMark);
     if (parts.length > 2) raw = parts[0] + decimalMark + parts.slice(1).join("");
     if (raw !== amountFromInput.value) amountFromInput.value = raw;
-    state.amountFrom = raw === "" ? 0 : parseFloat(raw.replace(",", ".")) || 0;
+    state.amountFrom = state.requested = raw === "" ? 0 : parseFloat(raw.replace(",", ".")) || 0;
+    pendingPay = null;
     recalc();
   });
 
   amountFromInput.addEventListener("blur", () => {
+    if (pendingPay && pendingPay.requested === state.requested && pendingPay.pay < state.amountFrom) {
+      state.amountFrom = pendingPay.pay;
+      pendingPay = null;
+      recalc();
+    }
     amountFromInput.value = formatNumber(state.amountFrom, cur(state.from).decimals);
   });
 

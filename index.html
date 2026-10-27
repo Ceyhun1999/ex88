@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ex88.ru — обмен рублей на баты и донги</title>
-  <meta name="description" content="Посчитайте обмен рублей, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером.">
+  <title data-i18n="title">Ex88.ru — обмен рублей на баты и донги</title>
+  <meta name="description" content="Посчитайте обмен рублей, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером." data-i18n-content="description">
   <meta name="theme-color" content="#0B3B2C">
 
   <!-- Set the theme before the first paint so the page never flashes the wrong colours -->
@@ -19,9 +19,12 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts for the first screen: Russian text plus the Latin subsets for digits and names,
+       so nothing reflows when a late font arrives -->
+  <link rel="preload" href="assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="assets/img/logo.webp" type="image/webp">
@@ -207,7 +210,7 @@
         </svg>
       </button>
 
-      <a href="#" class="header__tg" id="header-tg">
+      <a href="#" class="header__tg" id="header-tg" aria-label="Написать в Telegram" data-i18n-aria="tgWrite">
         <svg viewBox="0 0 41 35" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
         <span class="header__tg-label" data-i18n="tgWrite">Написать в Telegram</span>
       </a>
@@ -246,8 +249,9 @@
               <label for="amount-from" data-i18n="youSend">Вы отдаёте</label>
               <div class="calculator__row">
                 <input type="text" inputmode="decimal" id="amount-from" autocomplete="off">
-                <button type="button" class="currency-select" id="currency-from" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта, которую вы отдаёте" data-i18n-aria="currencyFromLabel">
-                  <span class="currency-select__flag"></span>
+                <button type="button" class="currency-select" id="currency-from" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="visually-hidden" data-i18n="currencyFromLabel">Валюта, которую вы отдаёте</span>
+                  <span class="currency-select__flag" aria-hidden="true"></span>
                   <span class="currency-select__code"></span>
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
@@ -266,8 +270,9 @@
               <div class="calculator__row calculator__row--result" id="result-row">
                 <span class="calculator__skeleton" aria-hidden="true"></span>
                 <input type="text" id="amount-to" readonly tabindex="-1">
-                <button type="button" class="currency-select" id="currency-to" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта, которую вы получаете" data-i18n-aria="currencyToLabel">
-                  <span class="currency-select__flag"></span>
+                <button type="button" class="currency-select" id="currency-to" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="visually-hidden" data-i18n="currencyToLabel">Валюта, которую вы получаете</span>
+                  <span class="currency-select__flag" aria-hidden="true"></span>
                   <span class="currency-select__code"></span>
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
@@ -398,7 +403,7 @@
         <div class="offices__panel">
           <div class="offices__side">
             <div class="offices__tabs" id="office-tabs" role="tablist" aria-label="Офисы" data-i18n-aria="officesList"></div>
-            <article class="office" id="office-panel" role="tabpanel">
+            <div class="office" id="office-panel" role="tabpanel">
               <h3 class="office__name" id="office-name" translate="no">Si Phraya</h3>
               <p class="office__floor" id="office-place" translate="no">Ex88 BangRak</p>
               <address class="office__address" id="office-address">362/5 Si Phraya Rd, Maha Phruttharam, Bang Rak, Бангкок 10500, Таиланд</address>
@@ -413,7 +418,7 @@
                 </button>
               </div>
               <p class="visually-hidden" id="office-copy-status" aria-live="polite"></p>
-            </article>
+            </div>
           </div>
           <div class="offices__map">
             <iframe id="office-map" src="https://maps.google.com/maps?q=Ex88%2C%20362%2F5%20Si%20Phraya%20Rd%2C%20Bangkok&amp;z=16&amp;hl=ru&amp;output=embed" title="Карта офиса: Si Phraya" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -627,6 +632,6 @@
     </ul>
   </div>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>

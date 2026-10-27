@@ -81,7 +81,7 @@ Ex88 помогает туристам и тем, кто живёт в Таил�
 - 🌐 **Русский и английский.** Все тексты, подписи для скринридеров и формат чисел (`50 000,00` / `50,000.00`) переключаются на лету.
 - ♿ **Доступность.** Семантическая разметка, работа с клавиатуры, видимый фокус, `aria`-подписи. Всё, что движется само, ставится на паузу, а при `prefers-reduced-motion` спокойнее или выключено.
 - ⚡ **Лёгкость.** Без фреймворков и сборки. Картинки в WebP двух размеров, анимации только на `transform` и `opacity`.
-- 🔎 **SEO.** Мета-теги, разметка `FAQPage` в JSON-LD, страницы документов с `canonical`.
+- 🔎 **SEO.** Отдельный адрес на каждый язык (`/ru`, `/en`), `canonical`, `hreflang`, Open Graph, JSON-LD (Organization, WebSite, FAQPage, BreadcrumbList), `robots.txt` и `sitemap.xml`: всё собирает `scripts/build.mjs`.
 - 📄 **Документы.** Условия пользования, политика конфиденциальности и политика cookie на двух языках.
 
 ## Технологии
@@ -92,7 +92,7 @@ Ex88 помогает туристам и тем, кто живёт в Таил�
 | Логика | Vanilla JavaScript, без зависимостей |
 | Данные | [EX-88 API](https://ex-88.pro/docs): `GET /api/rates`, `POST /api/exchange/calculate` |
 | Карта | Google Maps embed |
-| Шрифты | Unbounded (заголовки), Onest (текст) |
+| Шрифты | Unbounded (заголовки), Onest (текст), лежат в `assets/fonts` |
 | Хостинг | Netlify |
 
 ## Структура
@@ -107,7 +107,12 @@ ex88/
 │   ├── style.css       # Все стили и дизайн-токены
 │   ├── reset.css
 │   ├── js/main.js      # Тема, язык, калькулятор, слайдер, офисы, FAQ
-│   └── img/            # Логотип, значки банков, иллюстрации (WebP)
+│   ├── fonts/          # Onest и Unbounded (WOFF2, по подмножествам)
+│   └── img/            # Логотип, значки банков, иллюстрации (WebP), картинки для соцсетей
+├── scripts/build.mjs   # Production-сборка в dist/
+├── deploy/nginx.conf   # Те же редиректы и заголовки для nginx
+├── netlify.toml        # Сборка на Netlify
+├── reports/            # Замеры Lighthouse до и после оптимизации
 ├── docs/screenshots/   # Скриншоты для этого README
 └── CLAUDE.md           # Правила проекта: дизайн, анимации, языки, контент
 ```
@@ -123,13 +128,24 @@ python3 -m http.server 8000
 # открыть http://127.0.0.1:8000
 ```
 
+### Production-сборка
+
+```bash
+node scripts/build.mjs      # пишет dist/, Node 18+, без зависимостей
+npx serve dist              # те же адреса, что на ex88.ru: /ru, /en, /ru/terms…
+```
+
+Сборка делает из исходников страницы `/ru`, `/en`, `/ru|en/terms`, `/ru|en/privacy`, `/ru|en/cookies` (английский текст уже в HTML), встраивает CSS, добавляет `canonical`, `hreflang`, Open Graph и JSON-LD, хэширует скрипт и пишет `robots.txt`, `sitemap.xml`, `_redirects` и `_headers` для Netlify. На Netlify сборка запускается сама (`netlify.toml`); для nginx есть `deploy/nginx.conf`. Подробности и замеры: `SEO_PERFORMANCE_REPORT.md`.
+
 > API курсов пускает запросы только с адреса сайта (CORS). Локально калькулятор покажет «Курс временно недоступен», пока адрес `127.0.0.1` не добавят на стороне API или пока запросы к `/api/*` не идут через прокси.
 
 ## Перед запуском в продакшн
 
-- [ ] Заменить заглушки ссылок в начале `assets/js/main.js`: `BOT_USERNAME`, `WHATSAPP_NUMBER`, `APP_URL`.
+- [ ] Заменить заглушки ссылок в начале `assets/js/main.js`: `WHATSAPP_NUMBER` (Telegram-ссылки `BOT_URL` и `APP_URL` уже заданы).
 - [ ] Заменить демо-отзывы в `REVIEWS` на настоящие (с разрешения клиентов).
 - [ ] Добавить боевой домен в CORS на стороне EX-88 API.
+- [ ] Настроить `www.ex88.ru` (DNS и сертификат) с редиректом на `https://ex88.ru`.
+- [ ] После выкладки отправить `https://ex88.ru/sitemap.xml` в Google Search Console и Яндекс Вебмастер.
 - [ ] Вернуть бегущую строку курсов, если она нужна (сейчас скрыта в шапке `index.html`).
 
 ---
