@@ -135,7 +135,7 @@ node scripts/build.mjs      # пишет dist/, Node 18+, без зависим�
 npx serve dist              # те же адреса, что на ex88.ru: /ru, /en, /ru/terms…
 ```
 
-Сборка делает из исходников страницы `/ru`, `/en`, `/ru|en/terms`, `/ru|en/privacy`, `/ru|en/cookies` (английский текст уже в HTML), встраивает CSS, добавляет `canonical`, `hreflang`, Open Graph и JSON-LD, хэширует скрипт и пишет `robots.txt`, `sitemap.xml`, `_redirects` и `_headers` для Netlify. На Netlify сборка запускается сама (`netlify.toml`); для nginx есть `deploy/nginx.conf`. Подробности и замеры: `SEO_PERFORMANCE_REPORT.md`.
+Сборка делает из исходников страницы `/ru`, `/en`, `/ru|en/terms`, `/ru|en/privacy`, `/ru|en/cookies` (английский текст уже в HTML), встраивает CSS, добавляет `canonical`, `hreflang`, Open Graph и JSON-LD, хэширует скрипт и пишет `robots.txt`, `sitemap.xml`, `_redirects` и `_headers` для Netlify. На Netlify сборка запускается сама (`netlify.toml`); выкладка на свой сервер с nginx описана в [DEPLOY.md](DEPLOY.md). Подробности и замеры: `SEO_PERFORMANCE_REPORT.md`.
 
 > API курсов пускает запросы только с адреса сайта (CORS). Локально калькулятор покажет «Курс временно недоступен», пока адрес `127.0.0.1` не добавят на стороне API или пока запросы к `/api/*` не идут через прокси.
 
