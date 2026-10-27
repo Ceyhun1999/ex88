@@ -10,7 +10,7 @@
   const I18N = {
     ru: {
       title: "Ex88.ru — обмен рублей на баты и донги",
-      description: "Посчитайте обмен рублей, евро, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером.",
+      description: "Посчитайте обмен рублей, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером.",
       tickerLabel: "Ориентировочные курсы обмена",
       caption: "обмен валют",
       countryGroup: "Где получить деньги",
@@ -59,19 +59,17 @@
       faqGroupExchange: "Обмен и\u00a0получение денег",
       faqGroupProperty: "Недвижимость в\u00a0Таиланде",
       faqQ1: "Нужно ли\u00a0везти доллары или евро для обмена в\u00a0Таиланде?",
-      faqA1: "Везти наличные доллары или евро не\u00a0обязательно. Вы\u00a0можете перевести рубли с\u00a0российской карты на\u00a0другую российскую карту и\u00a0получить тайские баты в\u00a0Таиланде через один из\u00a018 офисов, наличными или через банкомат.",
+      faqA1: "Везти наличные доллары или евро не\u00a0обязательно. Вы\u00a0можете перевести рубли с\u00a0российской карты по\u00a0СБП или на\u00a0счет нашей компании и\u00a0получить тайские баты в\u00a0Таиланде в\u00a0офисе, доставкой или через банкомат.",
       faqQ2: "Как работает обмен рублей на\u00a0баты в\u00a0вашем сервисе?",
-      faqA2: "Вы\u00a0переводите рубли с\u00a0вашей российской карты на\u00a0указанную российскую карту, затем получаете тайские баты в\u00a0Таиланде через наш офис, бескарточный банкомат или курьерскую доставку.",
+      faqA2: "Вы\u00a0оплачиваете счет рублями с\u00a0вашей российской карты и\u00a0получаете тайские баты в\u00a0Таиланде через наш офис, банкомат без карты или курьерскую доставку.",
       faqQ3: "Можно ли\u00a0обменять рубли на\u00a0баты без посещения офиса?",
-      faqA3: "Да, тайские баты можно получить через банкомат по\u00a0пошаговой инструкции. Банкоматы расположены по\u00a0всему острову, что делает этот способ быстрым и\u00a0удобным.",
+      faqA3: "Да, тайские баты можно получить через банкомат по\u00a0пошаговой инструкции. Банкоматы расположены на\u00a0каждом шагу по\u00a0всему Таиланду, что делает этот способ быстрым и\u00a0удобным.",
       faqQ4: "Где располагаются ваши обменные офисы в\u00a0Таиланде?",
       faqA4: "Наш головной офис расположен в\u00a0столице Таиланда — городе Бангкок.",
       faqQ5: "Можно ли\u00a0получить наличные баты с\u00a0доставкой?",
       faqA5: "Да, мы\u00a0предоставляем курьерскую доставку наличных батов в\u00a0отели, апартаменты, виллы или любое удобное место.",
       faqQ6: "Как долго ждать баты после перевода рублей?",
       faqA6: "Получение батов обычно занимает минимальное время после подтверждения перевода, скорость зависит от\u00a0выбранного способа: офис, банкомат или курьер.",
-      faqQ7: "Безопасно ли\u00a0переводить деньги с\u00a0карты на\u00a0карту?",
-      faqA7: "Да, переводы безопасны: с\u00a0российской карты на\u00a0российскую карту, без сомнительных схем, все операции прозрачны.",
       faqQ8: "Какие суммы можно обменять через ваш сервис?",
       faqA8: "Можно обменять как небольшие суммы на\u00a0ежедневные расходы, так и\u00a0крупные суммы на\u00a0отпуск или длительное пребывание. Конкретные лимиты указываются при оформлении заказа.",
       faqQ9: "Что выгоднее: банкомат, офис или курьер?",
@@ -107,23 +105,27 @@
       currencyFromLabel: "Валюта, которую вы отдаёте",
       currencyToLabel: "Валюта, которую вы получаете",
       swapLabel: "Поменять валюты местами",
-      submit: "Продолжить в Telegram",
-      calcHint: "Откроется чат с менеджером, сумма и\u00a0валюты подставятся сами",
+      submit: "Обменять в Telegram",
+      calcHint: "Получите точный расчёт у\u00a0менеджера",
       pairTo: "в",
       per: "за",
       RUB: "Российский рубль",
-      EUR: "Евро",
       USD: "Доллар США",
       THB: "Тайский бат",
       VND: "Вьетнамский донг",
+      USD_ONLINE: "Доллары США онлайн",
+      rateLoading: "Загружаем курс…",
+      rateError: "Курс временно недоступен. Менеджер назовёт его в\u00a0чате",
+      rateMin: "Минимальная сумма —",
+      receiveMethod: "Как получить",
       acceptTitle: "Мы принимаем рубли и\u00a0другие виды валют",
+      bankSbp: "СБП",
       bankT: "Т-Банк",
       bankSber: "Сбербанк",
-      bankRaif: "Райффайзен",
       bankAlfa: "Альфа-Банк",
       usd: "Доллары США",
       receiveTitle: "Способы получения",
-      receiveLead: "Скажите менеджеру в\u00a0Telegram, как вам удобнее, и\u00a0мы подготовим обмен под этот способ",
+      receiveLead: "Менеджер подберёт самый удобный способ",
       receiveOffice: "Наличные в\u00a0офисе",
       receiveOfficeText: "Приходите в\u00a0наш офис и\u00a0забираете баты или донги",
       receiveDelivery: "Доставка",
@@ -146,7 +148,7 @@
     },
     en: {
       title: "Ex88.ru — exchange rubles for baht and dong",
-      description: "Calculate an exchange of rubles, euros, dollars, Thai baht and Vietnamese dong, then continue in Telegram with a manager.",
+      description: "Calculate an exchange of rubles, dollars, Thai baht and Vietnamese dong, then continue in Telegram with a manager.",
       tickerLabel: "Approximate exchange rates",
       caption: "currency exchange",
       countryGroup: "Where to receive money",
@@ -195,19 +197,17 @@
       faqGroupExchange: "Exchange and receiving money",
       faqGroupProperty: "Property in Thailand",
       faqQ1: "Do I need to bring dollars or euros to exchange in Thailand?",
-      faqA1: "You don't need to bring cash dollars or euros. You can transfer rubles from your Russian card to another Russian card and receive Thai baht in Thailand at one of 18 offices, in cash or from an ATM.",
+      faqA1: "You don't need to bring cash dollars or euros. You can transfer rubles from your Russian card via SBP or to our company's account and receive Thai baht in Thailand at an office, by delivery or from an ATM.",
       faqQ2: "How does exchanging rubles for baht work?",
-      faqA2: "You transfer rubles from your Russian card to the Russian card we give you, then receive Thai baht in Thailand at our office, from a cardless ATM or by courier delivery.",
+      faqA2: "You pay the invoice in rubles from your Russian card and receive Thai baht in Thailand at our office, from a cardless ATM or by courier delivery.",
       faqQ3: "Can I exchange rubles for baht without visiting an office?",
-      faqA3: "Yes, you can collect Thai baht from an ATM by following step-by-step instructions. ATMs are all over the island, which makes this way quick and convenient.",
+      faqA3: "Yes, you can get Thai baht from an ATM by following step-by-step instructions. ATMs are on every corner all over Thailand, which makes this way quick and convenient.",
       faqQ4: "Where are your exchange offices in Thailand?",
       faqA4: "Our head office is in Bangkok, the capital of Thailand.",
       faqQ5: "Can I get cash baht delivered?",
       faqA5: "Yes, we deliver cash baht by courier to hotels, apartments, villas or any place that suits you.",
       faqQ6: "How long does it take to get baht after transferring rubles?",
       faqA6: "Baht usually arrive shortly after the transfer is confirmed. The speed depends on the method you choose: office, ATM or courier.",
-      faqQ7: "Is a card-to-card transfer safe?",
-      faqA7: "Yes, transfers are safe: from a Russian card to a Russian card, with no questionable schemes, and every operation is transparent.",
       faqQ8: "What amounts can I exchange?",
       faqA8: "Both small amounts for daily spending and large sums for a holiday or a long stay. Specific limits are given when you place an order.",
       faqQ9: "Which is better: ATM, office or courier?",
@@ -233,7 +233,7 @@
       menuClose: "Close menu",
       tickerPause: "Pause the ticker",
       tickerResume: "Resume the ticker",
-      heroTitle: "Swap rubles for\u00a0baht and\u00a0dong, skip the\u00a0bank",
+      heroTitle: "Exchange rubles for\u00a0baht and\u00a0dong, skip the\u00a0bank",
       heroLead: "Calculate the amount here, and\u00a0a\u00a0manager in Telegram will confirm the rate and explain how to receive your money.",
       ratesTitle: "Today\u2019s rates",
       ratesNote: "Click a rate to use it in the\u00a0calculation",
@@ -243,23 +243,27 @@
       currencyFromLabel: "Currency you send",
       currencyToLabel: "Currency you receive",
       swapLabel: "Swap currencies",
-      submit: "Continue in Telegram",
-      calcHint: "A chat with a manager will open, with the amount and currencies filled in",
+      submit: "Exchange in Telegram",
+      calcHint: "Get an exact quote from a manager",
       pairTo: "to",
       per: "per",
       RUB: "Russian ruble",
-      EUR: "Euro",
       USD: "US dollar",
       THB: "Thai baht",
       VND: "Vietnamese dong",
+      USD_ONLINE: "US dollars online",
+      rateLoading: "Loading the rate…",
+      rateError: "The rate is unavailable right now. A manager will give it to you in the chat",
+      rateMin: "Minimum amount:",
+      receiveMethod: "How to receive",
       acceptTitle: "We accept rubles and\u00a0other currencies",
+      bankSbp: "SBP",
       bankT: "T-Bank",
       bankSber: "Sberbank",
-      bankRaif: "Raiffeisen",
       bankAlfa: "Alfa-Bank",
       usd: "US dollars",
       receiveTitle: "Ways to receive",
-      receiveLead: "Tell the manager in Telegram what suits you, and we will prepare the exchange that way",
+      receiveLead: "A manager will pick the most convenient way for you",
       receiveOffice: "Cash at our office",
       receiveOfficeText: "Come to our office and pick up baht or dong",
       receiveDelivery: "Delivery",
@@ -619,6 +623,16 @@
     return;
   }
 
+  /* FAQ accordion: opening a question closes the others. The `name` attribute on the
+     <details> does this natively in current browsers; this covers older ones. */
+  const faqPanel = document.querySelector(".faq__panel");
+  faqPanel.addEventListener("toggle", (e) => {
+    if (!e.target.open) return;
+    faqPanel.querySelectorAll("details[open]").forEach((item) => {
+      if (item !== e.target) item.open = false;
+    });
+  }, true);
+
   /* FAQ chat card: a short conversation plays in a loop. New bubbles push the older ones up
      (FLIP on transform), the manager "types" before each reply. Pauses off-screen and in
      hidden tabs; with reduced motion the first question and answer just stand still. */
@@ -977,22 +991,23 @@
   // Hero banner, the FAQ chat card and the closing contact panel share the same waves
   document.querySelectorAll("[data-guilloche]").forEach(setupGuilloche);
 
-  /* Calculator */
-  const CURRENCIES = {
-    RUB: { flag: "🇷🇺", perUsd: 80, decimals: 0, defaultAmount: 50000 },
-    EUR: { flag: "🇪🇺", perUsd: 0.92, decimals: 2, defaultAmount: 500 },
-    USD: { flag: "🇺🇸", perUsd: 1, decimals: 2, defaultAmount: 500 },
-    THB: { flag: "🇹🇭", perUsd: 32, decimals: 2, defaultAmount: 20000 },
-    VND: { flag: "🇻🇳", perUsd: 25400, decimals: 0, defaultAmount: 10000000 },
-  };
+  /* Calculator. Rates come from the EX-88 API (GET /api/rates, https://ex-88.pro/docs);
+     the API allows the site's domain via CORS. A rate depends on the amount (ranges) and
+     on how the money is received: some ranges belong to one receive method. The rates
+     list and the ticker show the general rate only. /api/exchange/calculate still needs
+     a signed-in user, so the public calculator applies the ranges itself. */
+  const RATES_URL = "https://ex-88.pro/api/rates";
+  const RATES_REFRESH_MS = 10 * 60 * 1000;
+  const RATES_RETRY_MS = 30 * 1000;
 
-  const RATE_PAIRS = [
-    ["RUB", "THB"],
-    ["RUB", "VND"],
-    ["USD", "THB"],
-    ["EUR", "THB"],
-    ["USD", "VND"],
-  ];
+  // API currency code -> how the site shows it
+  const CURRENCIES = {
+    RUB: { code: "RUB", flag: "🇷🇺", decimals: 0, defaultAmount: 50000 },
+    THB: { code: "THB", flag: "🇹🇭", decimals: 2, defaultAmount: 20000 },
+    VND: { code: "VND", flag: "🇻🇳", decimals: 0, defaultAmount: 10000000 },
+    "USD ONLINE": { code: "USD", flag: "🇺🇸", decimals: 2, defaultAmount: 500, nameKey: "USD_ONLINE" },
+  };
+  const RATES_LIST_SIZE = 5;
 
   const amountFromInput = document.getElementById("amount-from");
   const amountToInput = document.getElementById("amount-to");
@@ -1004,6 +1019,7 @@
   const rateLine = document.getElementById("rate-line");
   const submitBtn = document.getElementById("submit-btn");
   const resultRow = document.getElementById("result-row");
+  const calculatorEl = document.getElementById("calculator");
   const ratesList = document.getElementById("rates-list");
   const tickerTrack = document.getElementById("ticker-track");
   const countrySwitch = document.querySelector('[data-switch="country"]');
@@ -1017,7 +1033,95 @@
   let rollNext = false;
   let rollFrame = 0;
 
-  const state = { from: "RUB", to: "THB", amountFrom: 50000 };
+  // pairs: [{ from, to, order, rounded, step, methods: [{ id, title, time }], ranges: [{ min, max, fromRate, toRate, method }] }]
+  let pairs = [];
+  let ratesStatus = "loading"; // "loading" | "ready" | "error"
+  const state = { from: "RUB", to: "THB", amountFrom: 50000, method: null };
+  const receiveMethodBox = document.getElementById("receive-method");
+  const receiveMethodOptions = document.getElementById("receive-method-options");
+
+  const cur = (code) => CURRENCIES[code] || { code, flag: "", decimals: 2, defaultAmount: 0 };
+  const curName = (code) => t(cur(code).nameKey || cur(code).code) || cur(code).code;
+  const findPair = (from, to) => pairs.find((p) => p.from === from && p.to === to);
+  const sources = () => [...new Set(pairs.map((p) => p.from))];
+  const targets = (from) => pairs.filter((p) => p.from === from).map((p) => p.to);
+
+  function parseRates(data) {
+    return data
+      .map((r) => ({
+        from: r.fromCurrency,
+        to: r.toCurrency,
+        order: r.order,
+        rounded: r.rounded,
+        step: r.roundingStep,
+        methods: (r.receiveMethods || [])
+          .filter((m) => m.isActive !== false)
+          .sort((a, b) => a.order - b.order)
+          .map((m) => ({
+            id: m.id,
+            title: { ru: m.title, en: m.titleEn || m.title },
+            time: { ru: m.time, en: m.timeEn || m.time },
+          })),
+        // method: null for the general rate, or the receive method the range belongs to
+        ranges: r.ranges
+          .map((g) => ({ min: g.minAmount, max: g.maxAmount, fromRate: parseFloat(g.fromRate), toRate: parseFloat(g.toRate), method: g.receiveMethodId || null }))
+          .filter((g) => g.fromRate > 0 && g.toRate > 0)
+          .sort((a, b) => a.min - b.min),
+      }))
+      .filter((p) => p.ranges.length)
+      .sort((a, b) => a.order - b.order);
+  }
+
+  // A receive method's own ranges come first; where it has none, the general ranges apply
+  function rangesFor(pair, method) {
+    const own = method ? pair.ranges.filter((g) => g.method === method) : [];
+    const general = pair.ranges.filter((g) => !g.method);
+    const list = own.concat(general);
+    return list.length ? list : pair.ranges;
+  }
+
+  const pairMin = (pair, method) => Math.min(...rangesFor(pair, method).map((g) => g.min));
+
+  // Rate and result for an amount; status tells whether the amount fits the limits
+  function quote(amount, from, to, method) {
+    const pair = findPair(from, to);
+    if (!pair) return null;
+    const ranges = rangesFor(pair, method);
+    let range = ranges.find((g) => amount >= g.min && (g.max == null || amount <= g.max));
+    let status = "ok";
+    if (!range) {
+      // Below the minimum is refused; above the last range the server keeps its rate
+      const sorted = ranges.slice().sort((a, b) => a.min - b.min);
+      status = amount < sorted[0].min ? "below" : "ok";
+      range = status === "below" ? sorted[0] : sorted[sorted.length - 1];
+    }
+    let value = (amount * range.toRate) / range.fromRate;
+    if (pair.rounded && pair.step > 0) value = Math.floor(value / pair.step) * pair.step;
+    return { value, range, status, pair };
+  }
+
+  // Both directions on one line: people read the rate both ways (2,61 as well as 0,383)
+  function formatUnitRate(rate) {
+    return rate >= 1
+      ? rate.toLocaleString(numberLocale(), { minimumFractionDigits: 2, maximumFractionDigits: rate >= 100 ? 2 : 3 })
+      : rate.toLocaleString(numberLocale(), { maximumSignificantDigits: 3 });
+  }
+
+  function showRates(from, to, range) {
+    rateLine.classList.remove("is-warning");
+    rateLine.innerHTML =
+      "<span>1 " + cur(from).code + " = " + formatUnitRate(range.toRate / range.fromRate) + " " + cur(to).code + "</span>" +
+      // Hidden "; " keeps the two rates apart when copied or read aloud; the bar shows the split
+      '<span class="visually-hidden">; </span>' +
+      '<span class="calculator__rate-back">1 ' + cur(to).code + " = " + formatUnitRate(range.fromRate / range.toRate) + " " + cur(from).code + "</span>";
+  }
+
+  // "1 THB = 2,60 RUB": always the side worth more as the unit
+  function rateText(from, to, range) {
+    return range.fromRate >= range.toRate
+      ? "1 " + cur(to).code + " = " + formatRate(range.fromRate / range.toRate) + " " + cur(from).code
+      : "1 " + cur(from).code + " = " + formatRate(range.toRate / range.fromRate) + " " + cur(to).code;
+  }
 
   function formatNumber(value, decimals) {
     return value.toLocaleString(numberLocale(), {
@@ -1034,10 +1138,6 @@
     });
   }
 
-  function convert(amount, from, to) {
-    return (amount / CURRENCIES[from].perUsd) * CURRENCIES[to].perUsd;
-  }
-
   function flashResult() {
     resultRow.classList.remove("is-updated");
     void resultRow.offsetWidth;
@@ -1045,23 +1145,22 @@
   }
 
   function renderCurrencyButton(btn, code) {
-    btn.querySelector(".currency-select__flag").textContent = CURRENCIES[code].flag;
-    btn.querySelector(".currency-select__code").textContent = code;
+    btn.querySelector(".currency-select__flag").textContent = cur(code).flag;
+    btn.querySelector(".currency-select__code").textContent = cur(code).code;
   }
 
-  function renderCurrencyList(listEl, selected, onSelect) {
+  function renderCurrencyList(listEl, codes, selected, onSelect) {
     listEl.innerHTML = "";
-    Object.keys(CURRENCIES).forEach((code) => {
-      const c = CURRENCIES[code];
+    codes.forEach((code) => {
       const li = document.createElement("li");
       const btn = document.createElement("button");
       btn.type = "button";
       btn.setAttribute("role", "option");
       btn.setAttribute("aria-selected", String(code === selected));
       btn.innerHTML =
-        '<span class="currency-list__flag">' + c.flag + "</span>" +
-        '<span class="currency-list__code">' + code + "</span>" +
-        '<span class="currency-list__name">' + t(code) + "</span>";
+        '<span class="currency-list__flag">' + cur(code).flag + "</span>" +
+        '<span class="currency-list__code">' + cur(code).code + "</span>" +
+        '<span class="currency-list__name">' + curName(code) + "</span>";
       btn.addEventListener("click", () => onSelect(code));
       li.appendChild(btn);
       listEl.appendChild(li);
@@ -1070,8 +1169,21 @@
 
   function renderRatesList() {
     ratesList.innerHTML = "";
-    RATE_PAIRS.forEach(([from, to]) => {
-      const rate = convert(1, from, to);
+    if (ratesStatus !== "ready") {
+      // Same number of rows while loading, so the hero keeps its height. Loading rows carry a
+      // moving sheen; after a failed load they stay still, so nothing pretends to be loading.
+      const row = ratesStatus === "loading"
+        ? '<li class="rates__item"><span class="rates__btn rates__btn--empty rates__btn--loading" aria-hidden="true">' +
+          '<span class="skeleton skeleton--pair"></span><span class="skeleton skeleton--value"></span></span></li>'
+        : '<li class="rates__item"><span class="rates__btn rates__btn--empty"><span class="rates__pair">…</span><span class="rates__value">—</span></span></li>';
+      ratesList.innerHTML = row.repeat(RATES_LIST_SIZE);
+      return;
+    }
+    pairs.slice(0, RATES_LIST_SIZE).forEach((pair) => {
+      const { from, to } = pair;
+      const range = rangesFor(pair, null).slice().sort((a, b) => a.min - b.min)[0];
+      const unitIsTo = range.fromRate >= range.toRate;
+      const value = unitIsTo ? range.fromRate / range.toRate : range.toRate / range.fromRate;
       const li = document.createElement("li");
       li.className = "rates__item";
       const btn = document.createElement("button");
@@ -1081,9 +1193,10 @@
       btn.dataset.to = to;
       btn.innerHTML =
         '<span class="rates__pair"><span class="rates__flags" aria-hidden="true">' +
-        CURRENCIES[from].flag + CURRENCIES[to].flag + "</span>" + from + " " + t("pairTo") + " " + to + "</span>" +
-        '<span class="rates__value">' + formatRate(rate) +
-        "<small>" + to + " " + t("per") + " 1 " + from + "</small></span>";
+        cur(from).flag + cur(to).flag + "</span>" + cur(from).code + " " + t("pairTo") + " " + cur(to).code + "</span>" +
+        '<span class="rates__value">' + formatRate(value) +
+        "<small>" + (unitIsTo ? cur(from).code : cur(to).code) + " " + t("per") + " 1 " +
+        (unitIsTo ? cur(to).code : cur(from).code) + "</small></span>";
       btn.addEventListener("click", () => {
         setPair(from, to);
         amountFromInput.focus({ preventScroll: true });
@@ -1091,19 +1204,20 @@
       li.appendChild(btn);
       ratesList.appendChild(li);
     });
+    syncRatesList();
   }
 
   function renderTicker() {
-    const pairs = [
-      ["RUB", "THB"], ["RUB", "VND"], ["USD", "THB"], ["EUR", "THB"],
-      ["USD", "VND"], ["EUR", "VND"], ["USD", "RUB"], ["EUR", "RUB"],
-    ];
-    const html = pairs.map(([from, to]) => {
-      const rate = convert(1, from, to);
+    if (!tickerTrack) return;
+    if (ratesStatus !== "ready") {
+      tickerTrack.innerHTML = "";
+      return;
+    }
+    const html = pairs.map((pair) => {
       return '<span class="ticker__item">' +
-        '<span aria-hidden="true">' + CURRENCIES[from].flag + CURRENCIES[to].flag + "</span>" +
-        '<span class="ticker__pair">' + from + "/" + to + "</span>" +
-        '<span class="ticker__value">' + formatRate(rate) + "</span></span>";
+        '<span aria-hidden="true">' + cur(pair.from).flag + cur(pair.to).flag + "</span>" +
+        '<span class="ticker__pair">' + cur(pair.from).code + " → " + cur(pair.to).code + "</span>" +
+        '<span class="ticker__value">' + rateText(pair.from, pair.to, rangesFor(pair, null).slice().sort((a, b) => a.min - b.min)[0]) + "</span></span>";
     }).join("").repeat(2);
     tickerTrack.innerHTML = html + '<span class="ticker__copy" aria-hidden="true">' + html + "</span>";
   }
@@ -1114,7 +1228,7 @@
     });
     const countryIndex = Array.from(countryButtons).findIndex((btn) => btn.dataset.to === state.to);
     countrySwitch.dataset.active = countryIndex === -1 ? "none" : String(countryIndex);
-    ratesList.querySelectorAll(".rates__btn").forEach((btn) => {
+    ratesList.querySelectorAll(".rates__btn[data-from]").forEach((btn) => {
       const active = btn.dataset.from === state.from && btn.dataset.to === state.to;
       btn.setAttribute("aria-pressed", String(active));
     });
@@ -1135,7 +1249,7 @@
   }
 
   function setResult(result) {
-    const decimals = CURRENCIES[state.to].decimals;
+    const decimals = cur(state.to).decimals;
     const from = lastResult;
     const canRoll = rollNext && !reduceMotionQuery.matches;
     rollNext = false;
@@ -1158,39 +1272,162 @@
     rollFrame = requestAnimationFrame(step);
   }
 
+  // No number to show: loading, API unavailable, or the amount is outside the limits
+  function clearResult(text, isWarning) {
+    cancelAnimationFrame(rollFrame);
+    rollNext = false;
+    lastResult = 0;
+    amountToInput.value = text;
+    rateLine.classList.toggle("is-warning", Boolean(isWarning));
+  }
+
   function recalc() {
-    setResult(convert(state.amountFrom, state.from, state.to));
-
-    const rate = convert(1, state.from, state.to);
-    rateLine.textContent = rate < 0.01
-      ? "1 " + state.to + " = " + formatRate(1 / rate) + " " + state.from
-      : "1 " + state.from + " = " + formatRate(rate) + " " + state.to;
-
     const params = new URLSearchParams({
-      start: state.from + "_" + state.to + "_" + Math.round(state.amountFrom),
+      start: cur(state.from).code + "_" + cur(state.to).code + "_" + Math.round(state.amountFrom),
     });
     submitBtn.href = BOT_URL + "?" + params.toString();
+    swapBtn.disabled = ratesStatus === "ready" && !findPair(state.to, state.from);
+
+    const loading = ratesStatus === "loading";
+    resultRow.classList.toggle("is-loading", loading);
+    calculatorEl.setAttribute("aria-busy", String(loading));
+
+    if (ratesStatus !== "ready") {
+      clearResult(loading ? "" : "—", !loading);
+      // The exchange arrows from the logo turn while the rates load
+      rateLine.innerHTML = loading
+        ? '<span class="rate-loader"><svg class="rate-loader__mark" viewBox="0 0 648 618" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>' + t("rateLoading") + "</span>"
+        : t("rateError");
+      syncRatesList();
+      return;
+    }
+
+    // Instant estimate from the rates, then the server's own calculation replaces it
+    const q = quote(state.amountFrom, state.from, state.to, state.method);
+    if (q.status === "below") showMinimum(pairMin(q.pair, state.method));
+    else {
+      setResult(q.value);
+      showRates(state.from, state.to, q.range);
+    }
     syncRatesList();
+    scheduleServerQuote();
+  }
+
+  function showMinimum(min) {
+    clearResult("—", true);
+    rateLine.textContent = t("rateMin") + " " + formatNumber(min, 0) + " " + cur(state.from).code;
+  }
+
+  /* POST /api/exchange/calculate: the same calculation as the bot (rounding included).
+     Debounced while typing; an older answer never overwrites a newer one. If the server
+     does not answer, the estimate from the rates stays. */
+  const CALC_URL = "https://ex-88.pro/api/exchange/calculate";
+  let calcTimer = 0;
+  let calcController = null;
+
+  function scheduleServerQuote() {
+    clearTimeout(calcTimer);
+    if (calcController) calcController.abort();
+    if (!(state.amountFrom > 0)) return;
+    calcTimer = setTimeout(serverQuote, 300);
+  }
+
+  async function serverQuote() {
+    const asked = { from: state.from, to: state.to, amount: state.amountFrom, method: state.method };
+    calcController = new AbortController();
+    try {
+      const res = await fetch(CALC_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          fromCurrency: asked.from,
+          toCurrency: asked.to,
+          amount: asked.amount,
+          amountCurrency: asked.from,
+          receiveMethodId: asked.method || undefined,
+        }),
+        signal: calcController.signal,
+      });
+      const data = await res.json();
+      const stillCurrent = asked.from === state.from && asked.to === state.to &&
+        asked.amount === state.amountFrom && asked.method === state.method;
+      if (!stillCurrent) return;
+      if (res.ok && typeof data.toAmount === "number") {
+        rateLine.classList.remove("is-warning");
+        if (Math.abs(data.toAmount - lastResult) > 0.004) setResult(data.toAmount);
+        const fromRate = parseFloat(data.rateFromAmount);
+        const toRate = parseFloat(data.rateToAmount);
+        if (fromRate > 0 && toRate > 0) showRates(asked.from, asked.to, { fromRate, toRate });
+      } else if (res.status === 400 && /minimum/i.test(data.message || "")) {
+        const fromMessage = parseFloat((data.message.match(/[\d.]+/) || [])[0]);
+        const pair = findPair(asked.from, asked.to);
+        showMinimum(fromMessage > 0 ? fromMessage : pairMin(pair, asked.method));
+      }
+    } catch (e) {
+      // Aborted by a newer request, or the network failed: keep the estimate
+    }
   }
 
   function renderAll() {
     renderCurrencyButton(currencyFromBtn, state.from);
     renderCurrencyButton(currencyToBtn, state.to);
-    renderCurrencyList(currencyFromList, state.from, selectFrom);
-    renderCurrencyList(currencyToList, state.to, selectTo);
+    renderCurrencyList(currencyFromList, ratesStatus === "ready" ? sources() : [state.from], state.from, selectFrom);
+    renderCurrencyList(currencyToList, ratesStatus === "ready" ? targets(state.from) : [state.to], state.to, selectTo);
     if (document.activeElement !== amountFromInput) {
-      amountFromInput.value = formatNumber(state.amountFrom, CURRENCIES[state.from].decimals);
+      amountFromInput.value = formatNumber(state.amountFrom, cur(state.from).decimals);
     }
+    renderReceiveMethods();
     recalc();
   }
 
+  // How the money is received: a choice when the pair has several ways, a note when one
+  function renderReceiveMethods() {
+    const pair = ratesStatus === "ready" && findPair(state.from, state.to);
+    const methods = pair ? pair.methods : [];
+    receiveMethodBox.hidden = !methods.length;
+    receiveMethodBox.classList.toggle("is-single", methods.length === 1);
+    receiveMethodOptions.innerHTML = methods.map((m) => {
+      const label = '<span class="receive-method__title">' + m.title[lang] + "</span>" +
+        (m.time[lang] ? '<span class="receive-method__time">' + m.time[lang] + "</span>" : "");
+      if (methods.length === 1) return '<span class="receive-method__opt">' + label + "</span>";
+      return '<label class="receive-method__opt">' +
+        '<input type="radio" name="receive-method" value="' + m.id + '"' + (m.id === state.method ? " checked" : "") + ">" +
+        label + "</label>";
+    }).join("");
+  }
+
+  receiveMethodOptions.addEventListener("change", (e) => {
+    if (e.target.name !== "receive-method") return;
+    state.method = e.target.value;
+    rollNext = true;
+    recalc();
+    flashResult();
+  });
+
+  // A starting amount for a currency that is valid for the pair
+  function defaultAmount(from, to) {
+    const pair = findPair(from, to);
+    return Math.max(cur(from).defaultAmount, pair ? pairMin(pair, null) : 0);
+  }
+
+  // Keep the chosen receive method if the new pair offers it, otherwise take the first one
+  function syncMethod() {
+    const pair = findPair(state.from, state.to);
+    const methods = pair ? pair.methods : [];
+    if (!methods.some((m) => m.id === state.method)) state.method = methods.length ? methods[0].id : null;
+  }
+
   function setPair(from, to, amount) {
-    if (amount === undefined && from !== state.from) {
-      amount = CURRENCIES[from].defaultAmount;
+    if (ratesStatus === "ready" && !findPair(from, to)) {
+      // Keep the requested side and pick the first currency it can be exchanged with
+      if (targets(from).length) to = targets(from)[0];
+      else from = pairs.find((p) => p.to === to)?.from || pairs[0].from;
     }
+    if (amount === undefined && from !== state.from) amount = defaultAmount(from, to);
     if (amount !== undefined) state.amountFrom = amount;
     state.from = from;
     state.to = to;
+    if (ratesStatus === "ready") syncMethod();
     rollNext = true;
     renderAll();
     flashResult();
@@ -1204,6 +1441,32 @@
   function selectTo(code) {
     closeAllLists();
     setPair(state.from, code);
+  }
+
+  async function loadRates() {
+    try {
+      const res = await fetch(RATES_URL, { headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const parsed = parseRates(await res.json());
+      if (!parsed.length) throw new Error("No rates");
+      const first = ratesStatus !== "ready";
+      pairs = parsed;
+      ratesStatus = "ready";
+      if (!findPair(state.from, state.to)) setPair(state.from, state.to);
+      syncMethod();
+      if (first) rollNext = true;
+      renderRatesList();
+      renderTicker();
+      renderAll();
+      setTimeout(loadRates, RATES_REFRESH_MS);
+    } catch (e) {
+      // Keep showing the last rates if a refresh fails; otherwise say so and retry
+      if (ratesStatus !== "ready") {
+        ratesStatus = "error";
+        renderAll();
+      }
+      setTimeout(loadRates, ratesStatus === "ready" ? RATES_REFRESH_MS : RATES_RETRY_MS);
+    }
   }
 
   amountFromInput.addEventListener("focus", () => {
@@ -1225,7 +1488,7 @@
   });
 
   amountFromInput.addEventListener("blur", () => {
-    amountFromInput.value = formatNumber(state.amountFrom, CURRENCIES[state.from].decimals);
+    amountFromInput.value = formatNumber(state.amountFrom, cur(state.from).decimals);
   });
 
   currencyFromBtn.addEventListener("click", () => toggleList(currencyFromList, currencyFromBtn));
@@ -1243,12 +1506,14 @@
   });
 
   swapBtn.addEventListener("click", () => {
-    const factor = Math.pow(10, CURRENCIES[state.to].decimals);
-    const received = Math.round(convert(state.amountFrom, state.from, state.to) * factor) / factor;
-    setPair(state.to, state.from, received);
+    if (ratesStatus !== "ready" || !findPair(state.to, state.from)) return;
+    const q = quote(state.amountFrom, state.from, state.to, state.method);
+    const factor = Math.pow(10, cur(state.to).decimals);
+    const received = q.status === "ok" ? Math.round(q.value * factor) / factor : undefined;
+    setPair(state.to, state.from, received === undefined ? defaultAmount(state.to, state.from) : received);
   });
 
-  tickerToggle.addEventListener("click", () => {
+  if (tickerToggle) tickerToggle.addEventListener("click", () => {
     const paused = tickerEl.classList.toggle("is-paused");
     tickerToggle.setAttribute("aria-pressed", String(paused));
     tickerToggle.setAttribute(
@@ -1260,10 +1525,13 @@
   countryButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const to = btn.dataset.to;
-      setPair(state.from === to ? "RUB" : state.from, to);
+      const from = findPair(state.from, to) ? state.from : findPair("RUB", to) ? "RUB" : state.from;
+      setPair(from === to ? "RUB" : from, to);
       setNavOpen(false);
     });
   });
+
+  loadRates();
 
   /* Reviews slider: native horizontal scroll with snap, so touch swipe works as is */
   const reviewsTrack = document.getElementById("reviews-track");
@@ -1278,7 +1546,7 @@
   // Endless loop: a few cloned cards on each side (as many as the widest view shows);
   // once a scroll settles on a clone, the track jumps to the identical real card.
   const REVIEWS_CLONES = 3;
-  const REVIEWS_INTERVAL = 2000;
+  const REVIEWS_INTERVAL = 5000; // ms between slides; the longest review needs about 5 s to read
   const reviewsAuto = document.getElementById("reviews-auto");
   let reviewsIndex = REVIEWS_CLONES;
 
@@ -1337,7 +1605,7 @@
     }, { passive: true });
   }
 
-  /* Autoplay every 2 s. Stops while hovered, focused from the keyboard, touched, off-screen
+  /* Autoplay every REVIEWS_INTERVAL (5 s). Stops while hovered, focused from the keyboard, touched, off-screen
      or in a hidden tab; the pause button stops it for good (WCAG 2.2.2). Off by default
      with reduced motion. */
   const reviewsHolds = new Set(["offscreen"]);
@@ -1417,7 +1685,7 @@
   applyPage = () => {
     document.title = t("title");
     document.querySelector('meta[name="description"]').setAttribute("content", t("description"));
-    tickerToggle.setAttribute("aria-label", t(tickerEl.classList.contains("is-paused") ? "tickerResume" : "tickerPause"));
+    if (tickerToggle) tickerToggle.setAttribute("aria-label", t(tickerEl.classList.contains("is-paused") ? "tickerResume" : "tickerPause"));
 
     renderOffices();
     officeCopyLabel.textContent = t(officeCopyTimer ? "officeCopied" : "officeCopy");

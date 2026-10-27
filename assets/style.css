@@ -41,7 +41,7 @@
   --container: 1280px;
   --shadow-bubble: 0 1px 2px color-mix(in srgb, var(--shadow) 6%, transparent), 0 4px 10px -4px color-mix(in srgb, var(--shadow) 10%, transparent), 0 18px 36px -18px color-mix(in srgb, var(--shadow) 28%, transparent);
   --header-h: 72px;
-  --ticker-h: 34px;
+  --ticker-h: 0px; /* the rate ticker is hidden for now; 34px brings its space back */
 
   color-scheme: light;
 }
@@ -293,17 +293,17 @@ body {
 }
 
 /* Green coin inside the arrows with a black 88, as on the original mark.
-   The arrows follow the text colour (black, white at night). */
+   Arrows stay black in both themes. */
 .logo__disc {
-  fill: var(--green-600);
+  fill: var(--logo-disc, var(--green-600));
 }
 
 .logo__arrows {
-  fill: var(--ink);
+  fill: var(--logo-arrows, #000000);
 }
 
 .logo__digits {
-  fill: #000000;
+  fill: var(--logo-digits, #000000);
 }
 
 .logo__text {
@@ -663,6 +663,121 @@ body {
   transition: background-color 0.2s ease;
 }
 
+/* Placeholder rows while the rates load */
+.rates__btn--empty {
+  color: var(--on-dark-muted);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Loading state of the rates (API answer can take a few seconds)
+   ========================================================================== */
+/* Placeholder bars with a slow sheen, the same highlight as on the floating button */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  height: 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.skeleton--pair {
+  width: 112px;
+}
+
+.skeleton--value {
+  width: 84px;
+  height: 18px;
+}
+
+.skeleton::after,
+.calculator__skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.22) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: skeleton-sheen 1.6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+/* Rows a little out of step, so the sheen runs down the list */
+.rates__item:nth-child(2) .skeleton::after { animation-delay: 0.12s; }
+.rates__item:nth-child(3) .skeleton::after { animation-delay: 0.24s; }
+.rates__item:nth-child(4) .skeleton::after { animation-delay: 0.36s; }
+.rates__item:nth-child(5) .skeleton::after { animation-delay: 0.48s; }
+
+@keyframes skeleton-sheen {
+  to { transform: translateX(100%); }
+}
+
+/* Result field: a bar in place of the amount */
+.calculator__skeleton {
+  display: none;
+}
+
+.calculator__row--result.is-loading .calculator__skeleton {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  flex: 0 1 46%;
+  height: 22px;
+  margin-block: 5px;
+  margin-right: auto;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--on-tint) 12%, transparent);
+}
+
+.calculator__row--result.is-loading .calculator__skeleton::after {
+  background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--surface) 70%, transparent) 50%, transparent 80%);
+}
+
+.calculator__row--result.is-loading input {
+  flex: 0 0 0;
+  width: 0;
+}
+
+/* The logo's exchange arrows turning next to "Loading the rate…" */
+.rate-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rate-loader__mark {
+  --logo-disc: transparent;
+  --logo-digits: transparent;
+  --logo-arrows: var(--accent);
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  animation: rate-loader-turn 1.4s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes rate-loader-turn {
+  to { rotate: 360deg; }
+}
+
+/* Reduced motion: no sheen and no spin; a soft pulse still says "loading" */
+@keyframes loader-pulse {
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after,
+  .calculator__skeleton::after {
+    display: none;
+  }
+
+  .rates__btn--loading,
+  .calculator__row--result.is-loading .calculator__skeleton,
+  .rate-loader__mark {
+    animation: loader-pulse 1.6s ease-in-out infinite !important;
+    animation-duration: 1.6s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
 .rates__btn:hover {
   background: rgba(255, 255, 255, 0.06);
 }
@@ -883,8 +998,14 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.swap-btn:hover {
+.swap-btn:hover:not(:disabled) {
   background: var(--green-600);
+}
+
+/* No reverse direction in the API for this pair */
+.swap-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .swap-btn svg {
@@ -897,6 +1018,109 @@ body {
   font-size: 14px;
   color: var(--ink-muted);
   font-variant-numeric: tabular-nums;
+}
+
+/* How the money is received: pills when there is a choice, a plain note when not */
+.receive-method {
+  min-width: 0;
+  margin: 14px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.receive-method[hidden] {
+  display: none;
+}
+
+.receive-method__legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.receive-method__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.receive-method__opt {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.receive-method__opt:hover {
+  background: var(--tint);
+}
+
+.receive-method__opt input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.receive-method__opt:has(input:checked) {
+  background: var(--solid);
+  box-shadow: none;
+  color: var(--on-dark);
+}
+
+.receive-method__opt:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.receive-method__time {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.receive-method__opt:has(input:checked) .receive-method__time {
+  color: var(--on-dark-muted);
+}
+
+/* One way only: shown as information, not as a button */
+.receive-method.is-single .receive-method__opt {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Rate both ways; wraps to two lines when the card is narrow */
+.calculator__rate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.calculator__rate-back {
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+}
+
+/* Amount outside the pair's limits, or rates unavailable */
+.calculator__rate.is-warning {
+  color: #B4561F;
+  font-weight: 600;
+}
+
+:root[data-theme="dark"] .calculator__rate.is-warning {
+  color: #F2A06B;
 }
 
 .calculator__hint {
@@ -1033,9 +1257,9 @@ body {
   mask-image: radial-gradient(circle at 100% 0, #000 0, transparent 62%);
 }
 
+.accept__item--sbp { --brand: #5B57A2; --ring: rgba(91, 87, 162, 0.45); }
 .accept__item--tbank { --brand: #FFDD2D; --ring: rgba(178, 150, 0, 0.45); }
 .accept__item--sber { --brand: #21A038; --ring: rgba(33, 160, 56, 0.35); }
-.accept__item--raif { --brand: #FFE600; --ring: rgba(170, 150, 0, 0.45); }
 .accept__item--alfa { --brand: #EF3124; --ring: rgba(239, 49, 36, 0.3); }
 .accept__item--usd { --brand: #3C3B6E; --ring: rgba(60, 59, 110, 0.3); }
 
@@ -1160,8 +1384,9 @@ body {
   line-height: 1.2;
 }
 
+/* Starts below the picture: the renders reach their bottom edge, so no overlap */
 .receive__name {
-  margin-top: -8px;
+  margin-top: 12px;
   padding-inline: 14px;
   font-family: var(--font-display);
   font-weight: 600;
@@ -2752,8 +2977,8 @@ body {
 
 .channel__icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   color: var(--channel-icon);
   transition: rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -2806,8 +3031,8 @@ body {
   }
 
   .channel__icon {
-    width: 44px;
-    height: 44px;
+    width: 72px;
+    height: 72px;
   }
 }
 
@@ -2825,8 +3050,13 @@ body {
   }
 
   .channel {
-    min-height: 200px;
+    min-height: 220px;
     padding: 24px;
+  }
+
+  .channel__icon {
+    width: 84px;
+    height: 84px;
   }
 
   .channel__name {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ex88.ru — обмен рублей на баты и донги</title>
-  <meta name="description" content="Посчитайте обмен рублей, евро, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером.">
+  <meta name="description" content="Посчитайте обмен рублей, долларов, тайских батов и вьетнамских донгов и продолжите в Telegram с менеджером.">
   <meta name="theme-color" content="#0B3B2C">
 
   <!-- Set the theme before the first paint so the page never flashes the wrong colours -->
@@ -38,7 +38,7 @@
         "name": "Нужно ли везти доллары или евро для обмена в Таиланде?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Везти наличные доллары или евро не обязательно. Вы можете перевести рубли с российской карты на другую российскую карту и получить тайские баты в Таиланде через один из 18 офисов, наличными или через банкомат."
+          "text": "Везти наличные доллары или евро не обязательно. Вы можете перевести рубли с российской карты по СБП или на счет нашей компании и получить тайские баты в Таиланде в офисе, доставкой или через банкомат."
         }
       },
       {
@@ -46,7 +46,7 @@
         "name": "Как работает обмен рублей на баты в вашем сервисе?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Вы переводите рубли с вашей российской карты на указанную российскую карту, затем получаете тайские баты в Таиланде через наш офис, бескарточный банкомат или курьерскую доставку."
+          "text": "Вы оплачиваете счет рублями с вашей российской карты и получаете тайские баты в Таиланде через наш офис, банкомат без карты или курьерскую доставку."
         }
       },
       {
@@ -54,7 +54,7 @@
         "name": "Можно ли обменять рубли на баты без посещения офиса?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Да, тайские баты можно получить через банкомат по пошаговой инструкции. Банкоматы расположены по всему острову, что делает этот способ быстрым и удобным."
+          "text": "Да, тайские баты можно получить через банкомат по пошаговой инструкции. Банкоматы расположены на каждом шагу по всему Таиланду, что делает этот способ быстрым и удобным."
         }
       },
       {
@@ -79,14 +79,6 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Получение батов обычно занимает минимальное время после подтверждения перевода, скорость зависит от выбранного способа: офис, банкомат или курьер."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Безопасно ли переводить деньги с карты на карту?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Да, переводы безопасны: с российской карты на российскую карту, без сомнительных схем, все операции прозрачны."
         }
       },
       {
@@ -163,6 +155,8 @@
   </svg>
 
   <header class="site-header" id="site-header">
+    <!-- Rate ticker hidden for now. To bring it back: uncomment this block, set --ticker-h to 34px
+         in assets/style.css (:root) and the script picks it up on its own.
     <div class="ticker">
       <p class="visually-hidden" data-i18n="tickerLabel">Ориентировочные курсы обмена</p>
       <div class="ticker__track" id="ticker-track"></div>
@@ -173,6 +167,7 @@
         </svg>
       </button>
     </div>
+    -->
 
     <div class="container header__inner">
       <a href="/" class="logo">
@@ -269,6 +264,7 @@
             <div class="calculator__field">
               <label for="amount-to" data-i18n="youReceive">Вы получаете</label>
               <div class="calculator__row calculator__row--result" id="result-row">
+                <span class="calculator__skeleton" aria-hidden="true"></span>
                 <input type="text" id="amount-to" readonly tabindex="-1">
                 <button type="button" class="currency-select" id="currency-to" aria-haspopup="listbox" aria-expanded="false" aria-label="Валюта, которую вы получаете" data-i18n-aria="currencyToLabel">
                   <span class="currency-select__flag"></span>
@@ -279,13 +275,18 @@
               </div>
             </div>
 
+            <fieldset class="receive-method" id="receive-method" hidden>
+              <legend class="receive-method__legend" data-i18n="receiveMethod">Как получить</legend>
+              <div class="receive-method__options" id="receive-method-options"></div>
+            </fieldset>
+
             <p class="calculator__rate" id="rate-line"></p>
 
             <a href="#" class="btn btn--tg btn--block" id="submit-btn">
               <svg viewBox="0 0 41 35" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M36.5839 31.4775C37.2853 29.2623 40.5721 7.18551 40.9784 2.83533C41.1011 1.51782 40.6964 0.642327 39.9038 0.251511C38.9453 -0.222929 37.5258 0.0142907 35.8791 0.625261C33.6205 1.46321 4.74607 14.0803 3.07781 14.8107C1.49579 15.5019 0 16.2562 0 17.3484C0 18.1164 0.442767 18.5482 1.66328 18.997C2.93354 19.4629 6.13241 20.4613 8.02122 20.9972C9.84038 21.5143 11.9116 21.0654 13.0724 20.3231C14.3029 19.5363 28.5029 9.75738 29.5228 8.90066C30.541 8.04394 31.3536 9.14129 30.5211 9.99972C29.6886 10.8564 19.9411 20.5927 18.6559 21.9409C17.0955 23.5776 18.2032 25.274 19.2496 25.9532C20.4452 26.728 29.0435 32.6636 30.3387 33.6159C31.6338 34.5682 32.9472 35 34.1495 35C35.3517 35 35.9852 33.3702 36.5839 31.4775Z"/></svg>
-              <span data-i18n="submit">Продолжить в Telegram</span>
+              <span data-i18n="submit">Обменять в Telegram</span>
             </a>
-            <p class="calculator__hint" data-i18n="calcHint">Откроется чат с менеджером, сумма и&nbsp;валюты подставятся сами</p>
+            <p class="calculator__hint" data-i18n="calcHint">Получите точный расчёт у&nbsp;менеджера</p>
           </div>
         </div>
       </div>
@@ -295,6 +296,11 @@
         <div class="accept__card">
           <h2 class="accept__title" id="accept-title" data-i18n="acceptTitle">Мы принимаем рубли и&nbsp;другие виды валют</h2>
           <ul class="accept__list">
+            <li class="accept__item accept__item--sbp">
+              <img class="accept__logo" src="assets/img/banks/sbp.svg" alt="" width="52" height="52" loading="lazy">
+              <span class="accept__code">RUB</span>
+              <span class="accept__name" data-i18n="bankSbp">СБП</span>
+            </li>
             <li class="accept__item accept__item--tbank">
               <img class="accept__logo" src="assets/img/banks/tbank.svg" alt="" width="52" height="52" loading="lazy">
               <span class="accept__code">RUB</span>
@@ -304,11 +310,6 @@
               <img class="accept__logo" src="assets/img/banks/sber.svg" alt="" width="52" height="52" loading="lazy">
               <span class="accept__code">RUB</span>
               <span class="accept__name" data-i18n="bankSber">Сбербанк</span>
-            </li>
-            <li class="accept__item accept__item--raif">
-              <img class="accept__logo" src="assets/img/banks/raiffeisen.svg" alt="" width="52" height="52" loading="lazy">
-              <span class="accept__code">RUB</span>
-              <span class="accept__name" data-i18n="bankRaif">Райффайзен</span>
             </li>
             <li class="accept__item accept__item--alfa">
               <img class="accept__logo" src="assets/img/banks/alfa.svg" alt="" width="52" height="52" loading="lazy">
@@ -329,7 +330,7 @@
       <div class="container">
         <div class="receive__head">
           <h2 class="receive__title" id="receive-title" data-i18n="receiveTitle">Способы получения</h2>
-          <p class="receive__lead" data-i18n="receiveLead">Скажите менеджеру в&nbsp;Telegram, как вам удобнее, и&nbsp;мы подготовим обмен под этот способ</p>
+          <p class="receive__lead" data-i18n="receiveLead">Менеджер подберёт самый удобный способ</p>
         </div>
         <ul class="receive__list">
           <li class="receive__item receive__item--office">
@@ -430,62 +431,58 @@
           </div>
           <div class="faq__group" role="group" aria-labelledby="faq-exchange">
             <h3 class="faq__group-title" id="faq-exchange" data-i18n="faqGroupExchange">Обмен и&nbsp;получение денег</h3>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ1">Нужно ли&nbsp;везти доллары или евро для обмена в&nbsp;Таиланде?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
-              <p class="faq__a" data-i18n="faqA1">Везти наличные доллары или евро не&nbsp;обязательно. Вы&nbsp;можете перевести рубли с&nbsp;российской карты на&nbsp;другую российскую карту и&nbsp;получить тайские баты в&nbsp;Таиланде через один из&nbsp;18 офисов, наличными или через банкомат.</p>
+              <p class="faq__a" data-i18n="faqA1">Везти наличные доллары или евро не&nbsp;обязательно. Вы&nbsp;можете перевести рубли с&nbsp;российской карты по&nbsp;СБП или на&nbsp;счет нашей компании и&nbsp;получить тайские баты в&nbsp;Таиланде в&nbsp;офисе, доставкой или через банкомат.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ2">Как работает обмен рублей на&nbsp;баты в&nbsp;вашем сервисе?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
-              <p class="faq__a" data-i18n="faqA2">Вы&nbsp;переводите рубли с&nbsp;вашей российской карты на&nbsp;указанную российскую карту, затем получаете тайские баты в&nbsp;Таиланде через наш офис, бескарточный банкомат или курьерскую доставку.</p>
+              <p class="faq__a" data-i18n="faqA2">Вы&nbsp;оплачиваете счет рублями с&nbsp;вашей российской карты и&nbsp;получаете тайские баты в&nbsp;Таиланде через наш офис, банкомат без карты или курьерскую доставку.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ3">Можно ли&nbsp;обменять рубли на&nbsp;баты без посещения офиса?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
-              <p class="faq__a" data-i18n="faqA3">Да, тайские баты можно получить через банкомат по&nbsp;пошаговой инструкции. Банкоматы расположены по&nbsp;всему острову, что делает этот способ быстрым и&nbsp;удобным.</p>
+              <p class="faq__a" data-i18n="faqA3">Да, тайские баты можно получить через банкомат по&nbsp;пошаговой инструкции. Банкоматы расположены на&nbsp;каждом шагу по&nbsp;всему Таиланду, что делает этот способ быстрым и&nbsp;удобным.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ4">Где располагаются ваши обменные офисы в&nbsp;Таиланде?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA4">Наш головной офис расположен в&nbsp;столице Таиланда — городе Бангкок.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ5">Можно ли&nbsp;получить наличные баты с&nbsp;доставкой?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA5">Да, мы&nbsp;предоставляем курьерскую доставку наличных батов в&nbsp;отели, апартаменты, виллы или любое удобное место.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ6">Как долго ждать баты после перевода рублей?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA6">Получение батов обычно занимает минимальное время после подтверждения перевода, скорость зависит от&nbsp;выбранного способа: офис, банкомат или курьер.</p>
             </details>
-            <details class="faq__item">
-              <summary class="faq__q"><span data-i18n="faqQ7">Безопасно ли&nbsp;переводить деньги с&nbsp;карты на&nbsp;карту?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
-              <p class="faq__a" data-i18n="faqA7">Да, переводы безопасны: с&nbsp;российской карты на&nbsp;российскую карту, без сомнительных схем, все операции прозрачны.</p>
-            </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ8">Какие суммы можно обменять через ваш сервис?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA8">Можно обменять как небольшие суммы на&nbsp;ежедневные расходы, так и&nbsp;крупные суммы на&nbsp;отпуск или длительное пребывание. Конкретные лимиты указываются при оформлении заказа.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ9">Что выгоднее: банкомат, офис или курьер?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA9">Сравнение безопасности и&nbsp;удобства разных способов: банкомат доступен везде, обменный офис надежен и&nbsp;предоставляет персональное обслуживание, курьер обеспечивает максимальный комфорт. Выбор зависит от&nbsp;ваших потребностей.</p>
             </details>
           </div>
           <div class="faq__group" role="group" aria-labelledby="faq-property">
             <h3 class="faq__group-title" id="faq-property" data-i18n="faqGroupProperty">Недвижимость в&nbsp;Таиланде</h3>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ10">Можно ли&nbsp;оплатить квартиру или виллу в&nbsp;Таиланде из&nbsp;России?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA10">Да, оплата недвижимости в&nbsp;Таиланде возможна из&nbsp;России и&nbsp;других стран. Сервис помогает конвертировать рубли и&nbsp;обрабатывать платежи в&nbsp;требуемой валюте.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ11">Помогает ли&nbsp;Ex88 с&nbsp;консультацией по&nbsp;застройщикам в&nbsp;Таиланде?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA11">Да, сервис Ex88 имеет большой опыт работы с&nbsp;тайским рынком и&nbsp;застройщиками, предлагает консультации по&nbsp;практическим нюансам сделок и&nbsp;рискам на&nbsp;этапе оплаты.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ12">Что такое справка Freehold и&nbsp;зачем она нужна?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA12">Справка Freehold — это подтверждение того, что средства на&nbsp;покупку недвижимости были переведены из-за&nbsp;границы, она требуется для регистрации недвижимости в&nbsp;некоторых странах.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ13">Помогает ли&nbsp;Ex88 с&nbsp;оформлением справки Freehold?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA13">Да, сервис Ex88 помогает с&nbsp;транзакциями по&nbsp;покупке недвижимости и&nbsp;обработкой необходимых сопроводительных документов, включая справку Freehold.</p>
             </details>
-            <details class="faq__item">
+            <details class="faq__item" name="faq">
               <summary class="faq__q"><span data-i18n="faqQ14">Можно ли&nbsp;получить справку Freehold, если покупка оплачивается из&nbsp;России?</span><svg class="faq__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="faq__plus" d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
               <p class="faq__a" data-i18n="faqA14">Да, при корректном оформлении платежа и&nbsp;соблюдении требований страны покупки.</p>
             </details>
