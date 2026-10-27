@@ -141,7 +141,7 @@ npx serve dist              # те же адреса, что на ex88.ru: /ru, 
 
 ## Перед запуском в продакшн
 
-- [ ] Заменить заглушки ссылок в начале `assets/js/main.js`: `WHATSAPP_NUMBER` (Telegram-ссылки `BOT_URL` и `APP_URL` уже заданы).
+- [ ] Заполнить в админке ссылки (`telegramBotUrl`, `telegramMiniAppUrl`, `whatsappUrl`): сайт берёт их из `GET /api/admin/public-config`. Сейчас `whatsappUrl` ведёт на Telegram-бота.
 - [ ] Заменить демо-отзывы в `REVIEWS` на настоящие (с разрешения клиентов).
 - [ ] Добавить боевой домен в CORS на стороне EX-88 API.
 - [ ] Настроить `www.ex88.ru` (DNS и сертификат) с редиректом на `https://ex88.ru`.

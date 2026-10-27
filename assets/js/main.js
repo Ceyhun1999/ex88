@@ -1,9 +1,50 @@
 (function () {
   "use strict";
 
-  const BOT_URL = "https://t.me/Ex88ru_bot/start-1";
-  const WHATSAPP_NUMBER = "REPLACE_WITH_WHATSAPP_NUMBER";
-  const APP_URL = "https://t.me/Ex88ru_bot?start=13FF-98E5";
+  /* Contact links come from the API's public settings (GET /api/admin/public-config), so
+     they are changed in the admin panel, not in the code. These are used until the
+     answer arrives or if the API does not answer. */
+  const PUBLIC_CONFIG_URL = "https://ex-88.pro/api/admin/public-config";
+  const links = {
+    bot: "https://t.me/Ex88ru_bot",
+    app: "https://t.me/Ex88ru_bot/EX88_app",
+    whatsapp: "",
+  };
+  // Every element whose href follows a link, by the link's name
+  const LINK_TARGETS = {
+    bot: ["header-tg", "footer-tg", "fab-tg", "contact-tg", "faq-tg"],
+    app: ["footer-app", "contact-app"],
+    whatsapp: ["footer-wa", "fab-wa", "contact-wa"],
+  };
+  let onLinksChange = () => {};
+
+  // A link without an address is hidden rather than left pointing nowhere
+  function applyLinks() {
+    Object.keys(LINK_TARGETS).forEach((name) => {
+      LINK_TARGETS[name].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (links[name]) el.href = links[name];
+        (el.closest("li") || el).hidden = !links[name];
+      });
+    });
+    onLinksChange();
+  }
+
+  async function loadPublicConfig() {
+    try {
+      const res = await fetch(PUBLIC_CONFIG_URL, { headers: { Accept: "application/json" } });
+      if (!res.ok) return;
+      const config = await res.json();
+      const valid = (url) => typeof url === "string" && /^https:\/\//.test(url);
+      if (valid(config.telegramBotUrl)) links.bot = config.telegramBotUrl;
+      if (valid(config.telegramMiniAppUrl)) links.app = config.telegramMiniAppUrl;
+      links.whatsapp = valid(config.whatsappUrl) ? config.whatsappUrl : "";
+      applyLinks();
+    } catch (e) {
+      // Network or CORS failure: the built-in links stay
+    }
+  }
 
   /* Languages */
   const I18N = {
@@ -495,7 +536,6 @@
     if (e.target.closest("a")) setNavOpen(false);
   });
 
-  document.getElementById("header-tg").href = BOT_URL;
 
   /* Theme: follows the system until the visitor picks one, then remembers it */
   const themeToggle = document.getElementById("theme-toggle");
@@ -522,17 +562,14 @@
   });
 
   /* Shared by every page: footer links, floating contact button, header shadow, language */
-  document.getElementById("footer-tg").href = BOT_URL;
-  document.getElementById("footer-wa").href = "https://wa.me/" + WHATSAPP_NUMBER;
-  document.getElementById("footer-app").href = APP_URL;
+  applyLinks();
+  loadPublicConfig();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 
   /* Floating contact button: opens instantly, closes on Esc, an outside click or a pick */
   const fab = document.getElementById("fab");
   const fabToggle = document.getElementById("fab-toggle");
   const fabList = document.getElementById("fab-list");
-  document.getElementById("fab-tg").href = BOT_URL;
-  document.getElementById("fab-wa").href = "https://wa.me/" + WHATSAPP_NUMBER;
 
   function setFabOpen(open) {
     fabToggle.setAttribute("aria-expanded", String(open));
@@ -888,10 +925,8 @@
       }, 2500);
     });
   });
-  document.getElementById("contact-tg").href = BOT_URL;
-  document.getElementById("faq-tg").href = BOT_URL;
-  document.getElementById("contact-wa").href = "https://wa.me/" + WHATSAPP_NUMBER;
-  document.getElementById("contact-app").href = APP_URL;
+  // Links of the blocks below the shared part (contact tiles, FAQ card)
+  applyLinks();
 
   /* Guilloche pattern, like the line work on banknotes. The lines slowly
      undulate; at tau = 0 every line matches the original static drawing. */
@@ -1339,8 +1374,10 @@
       start: [cur(state.from).code, cur(state.to).code, Math.round(state.amountFrom), state.method]
         .filter(Boolean).join("_").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64),
     });
-    submitBtn.href = BOT_URL + "?" + params.toString();
+    submitBtn.href = links.bot + (links.bot.includes("?") ? "&" : "?") + params.toString();
   }
+
+  onLinksChange = updateBotLink;
 
   function recalc() {
     updateBotLink();
