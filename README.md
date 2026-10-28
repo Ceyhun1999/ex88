@@ -4,152 +4,152 @@
 
 # Ex88.ru
 
-**Лендинг сервиса обмена рублей на тайские баты и вьетнамские донги**
+**Landing page for a service that exchanges rubles for Thai baht and Vietnamese dong**
 
-Посетитель считает обмен по живому курсу прямо на сайте и продолжает в Telegram с менеджером.
+Visitors calculate an exchange at the live rate right on the site, then continue with a manager in Telegram.
 
-[**Открыть сайт →**](https://gleeful-hotteok-49571d.netlify.app)
+[**Open the site →**](https://gleeful-hotteok-49571d.netlify.app)
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/Vanilla_JS-F7DF1E?logo=javascript&logoColor=black)
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)
-![RU / EN](https://img.shields.io/badge/языки-RU%20%2F%20EN-0A8060)
+![RU / EN](https://img.shields.io/badge/languages-RU%20%2F%20EN-0A8060)
 
 </div>
 
-![Главный экран со живым калькулятором](docs/screenshots/hero-light.webp)
+![Hero screen with the live calculator](docs/screenshots/hero-light.webp)
 
-## О проекте
+## About
 
-Ex88 помогает туристам и тем, кто живёт в Таиланде и Вьетнаме, обменять рубли без похода в банк: перевести рубли с российской карты и получить баты или донги в офисе, через банкомат без карты или курьером.
+Ex88 helps tourists and people living in Thailand and Vietnam exchange rubles without going to a bank: send rubles from a Russian card and get baht or dong at an office, from an ATM without a card, or by courier.
 
-Задача сайта простая: за несколько секунд показать, сколько человек получит, и привести его в чат с менеджером с уже заполненной суммой.
+The site has one job: show in a few seconds how much a person will receive, and bring them to a manager chat with the amount already filled in.
 
-Визуальный язык взят из мира денег: тёмно-зелёный цвет купюр, медленно колышущиеся гильош-линии, как на банкнотах, и знак обмена из логотипа.
+The visual language comes from money itself: banknote dark green, slowly drifting guilloche lines like on banknotes, and the exchange mark from the logo.
 
-## Что внутри
+## What's inside
 
-### Живой калькулятор обмена
+### Live exchange calculator
 
-- Курсы, список «Курс на сегодня» и сама сумма приходят из **EX-88 API**. Расчёт делает сервер, ровно как в боте, с теми же диапазонами сумм и округлением.
-- Выбор **способа получения** (банковский перевод по QR, банкомат без карты, доставка): у способа может быть свой курс.
-- Курс видно **в обе стороны** (`1 RUB = 0,382 THB │ 1 THB = 2,62 RUB`): люди привыкли считать и так, и так.
-- Проверка минимальной суммы, переключатель «Таиланд / Вьетнам», обмен валют местами, анимированный пересчёт результата.
-- Пока сервер отвечает, видно состояние загрузки: блик на заготовках строк и вращающиеся стрелки из логотипа.
+- Rates, the "Today's rate" list and the amount itself come from the **EX-88 API**. The server does the calculation, exactly like the bot, with the same amount ranges and rounding.
+- Choice of **receiving method** (bank transfer by QR, ATM without a card, delivery); a method can have its own rate.
+- The rate is shown **both ways** (`1 RUB = 0.382 THB │ 1 THB = 2.62 RUB`), because people are used to counting either way.
+- Minimum amount check, a Thailand / Vietnam switch, swapping currencies, and an animated result recalculation.
+- While the server responds there is a loading state: a shimmer on placeholder rows and the rotating arrows from the logo.
 
-| Светлая тема | Тёмная тема |
+| Light theme | Dark theme |
 |---|---|
-| ![Светлая тема](docs/screenshots/hero-light.webp) | ![Тёмная тема](docs/screenshots/hero-dark.webp) |
+| ![Light theme](docs/screenshots/hero-light.webp) | ![Dark theme](docs/screenshots/hero-dark.webp) |
 
-### Способы получения
+### Receiving methods
 
-Шесть способов в шахматной сетке с 3D-иллюстрациями: наличные в офисе, доставка, банкомат без карты, перевод по QR, оплата услуг и счетов, доллары онлайн.
+Six methods in a staggered grid with 3D illustrations: cash at an office, delivery, ATM without a card, QR transfer, paying for services and bills, and online dollars.
 
-![Способы получения](docs/screenshots/receive-light.webp)
+![Receiving methods](docs/screenshots/receive-light.webp)
 
-### Отзывы и офисы
+### Reviews and offices
 
-- Бесконечный слайдер отзывов с автопрокруткой, паузой и свайпом на телефоне.
-- Офисы с переключателем, картой Google, кнопками «Проложить маршрут» и «Скопировать адрес» (латиницей, чтобы показать таксисту или вставить в Grab).
+- Infinite review slider with auto-scroll, pause and swipe on phones.
+- Offices with a switcher, a Google map, "Get directions" and "Copy address" buttons (in Latin letters, to show a taxi driver or paste into Grab).
 
-![Отзывы](docs/screenshots/reviews-light.webp)
+![Reviews](docs/screenshots/reviews-light.webp)
 
-![Офисы обмена](docs/screenshots/offices-light.webp)
+![Exchange offices](docs/screenshots/offices-light.webp)
 
-### Частые вопросы
+### FAQ
 
-Аккордеон из 13 вопросов (открыт всегда только один) и карточка с живой перепиской: посетитель спрашивает, менеджер «печатает» и отвечает.
+An accordion of 13 questions (only one open at a time) and a card with a live conversation: the visitor asks, the manager "types" and replies.
 
-![Частые вопросы](docs/screenshots/faq-light.webp)
+![FAQ](docs/screenshots/faq-light.webp)
 
-### Связь с менеджером
+### Contacting a manager
 
-Блок с каналами связи (приложение, Telegram, WhatsApp), плавающая кнопка «Связаться с менеджером» на всех страницах и футер с реквизитами компании.
+A block with contact channels (app, Telegram, WhatsApp), a floating "Contact a manager" button on every page, and a footer with the company details.
 
-![Связь с менеджером](docs/screenshots/contacts-light.webp)
+![Contacting a manager](docs/screenshots/contacts-light.webp)
 
-### На телефоне
+### On mobile
 
-Вёрстка mobile-first, проверена на 375, 768, 1024 и 1440px.
+Mobile-first layout, checked at 375, 768, 1024 and 1440px.
 
-![Мобильная версия](docs/screenshots/mobile.webp)
+![Mobile version](docs/screenshots/mobile.webp)
 
-## Возможности
+## Features
 
-- 🌗 **Светлая и тёмная тема.** Сначала берётся из настроек системы, выбор запоминается.
-- 🌐 **Русский и английский.** Все тексты, подписи для скринридеров и формат чисел (`50 000,00` / `50,000.00`) переключаются на лету.
-- ♿ **Доступность.** Семантическая разметка, работа с клавиатуры, видимый фокус, `aria`-подписи. Всё, что движется само, ставится на паузу, а при `prefers-reduced-motion` спокойнее или выключено.
-- ⚡ **Лёгкость.** Без фреймворков и сборки. Картинки в WebP двух размеров, анимации только на `transform` и `opacity`.
-- 🔎 **SEO.** Отдельный адрес на каждый язык (`/ru`, `/en`), `canonical`, `hreflang`, Open Graph, JSON-LD (Organization, WebSite, FAQPage, BreadcrumbList), `robots.txt` и `sitemap.xml`: всё собирает `scripts/build.mjs`.
-- 📄 **Документы.** Условия пользования, политика конфиденциальности и политика cookie на двух языках.
+- 🌗 **Light and dark theme.** Follows the system setting first, and the choice is remembered.
+- 🌐 **Russian and English.** All text, screen reader labels and number formats (`50 000,00` / `50,000.00`) switch on the fly.
+- ♿ **Accessibility.** Semantic markup, keyboard support, visible focus, `aria` labels. Anything that moves on its own can be paused, and with `prefers-reduced-motion` it is calmer or off.
+- ⚡ **Lightweight.** No frameworks or build step for development. WebP images in two sizes, animations only on `transform` and `opacity`.
+- 🔎 **SEO.** A separate URL per language (`/ru`, `/en`), `canonical`, `hreflang`, Open Graph, JSON-LD (Organization, WebSite, FAQPage, BreadcrumbList), `robots.txt` and `sitemap.xml`, all generated by `scripts/build.mjs`.
+- 📄 **Legal documents.** Terms of use, privacy policy and cookie policy in two languages.
 
-## Технологии
+## Tech stack
 
 | | |
 |---|---|
-| Разметка и стили | HTML5, CSS3 (переменные, `color-mix`, `:has`, контейнерные сетки) |
-| Логика | Vanilla JavaScript, без зависимостей |
-| Данные | [EX-88 API](https://ex-88.pro/docs): `GET /api/rates`, `POST /api/exchange/calculate` |
-| Карта | Google Maps embed |
-| Шрифты | Unbounded (заголовки), Onest (текст), лежат в `assets/fonts` |
-| Хостинг | Netlify |
+| Markup and styles | HTML5, CSS3 (variables, `color-mix`, `:has`, container queries) |
+| Logic | Vanilla JavaScript, no dependencies |
+| Data | [EX-88 API](https://ex-88.pro/docs): `GET /api/rates`, `POST /api/exchange/calculate` |
+| Map | Google Maps embed |
+| Fonts | Unbounded (headings), Onest (text), stored in `assets/fonts` |
+| Hosting | Netlify |
 
-## Структура
+## Project structure
 
 ```
 ex88/
-├── index.html          # Главная страница
-├── terms.html          # Условия пользования
-├── privacy.html        # Политика конфиденциальности
-├── cookies.html        # Политика cookie
+├── index.html          # Home page
+├── terms.html          # Terms of use
+├── privacy.html        # Privacy policy
+├── cookies.html        # Cookie policy
 ├── assets/
-│   ├── style.css       # Все стили и дизайн-токены
+│   ├── style.css       # All styles and design tokens
 │   ├── reset.css
-│   ├── js/main.js      # Тема, язык, калькулятор, слайдер, офисы, FAQ
-│   ├── fonts/          # Onest и Unbounded (WOFF2, по подмножествам)
-│   └── img/            # Логотип, значки банков, иллюстрации (WebP), картинки для соцсетей
-├── scripts/build.mjs   # Production-сборка в dist/
-├── deploy/nginx.conf   # Те же редиректы и заголовки для nginx
-├── netlify.toml        # Сборка на Netlify
-├── reports/            # Замеры Lighthouse до и после оптимизации
-├── docs/screenshots/   # Скриншоты для этого README
-└── CLAUDE.md           # Правила проекта: дизайн, анимации, языки, контент
+│   ├── js/main.js      # Theme, language, calculator, slider, offices, FAQ
+│   ├── fonts/          # Onest and Unbounded (WOFF2, by subset)
+│   └── img/            # Logo, bank icons, illustrations (WebP), social images
+├── scripts/build.mjs   # Production build into dist/
+├── deploy/nginx.conf   # The same redirects and headers for nginx
+├── netlify.toml        # Netlify build
+├── reports/            # Lighthouse measurements before and after optimization
+├── docs/screenshots/   # Screenshots for this README
+└── CLAUDE.md           # Project rules: design, animation, languages, content
 ```
 
-## Запуск локально
+## Run locally
 
-Сборка не нужна, это статический сайт.
+No build is needed, it is a static site.
 
 ```bash
 git clone https://github.com/Ceyhun1999/ex88.git
 cd ex88
 python3 -m http.server 8000
-# открыть http://127.0.0.1:8000
+# open http://127.0.0.1:8000
 ```
 
-### Production-сборка
+### Production build
 
 ```bash
-node scripts/build.mjs      # пишет dist/, Node 18+, без зависимостей
-npx serve dist              # те же адреса, что на ex88.ru: /ru, /en, /ru/terms…
+node scripts/build.mjs      # writes dist/, Node 18+, no dependencies
+npx serve dist              # same URLs as ex88.ru: /ru, /en, /ru/terms…
 ```
 
-Сборка делает из исходников страницы `/ru`, `/en`, `/ru|en/terms`, `/ru|en/privacy`, `/ru|en/cookies` (английский текст уже в HTML), встраивает CSS, добавляет `canonical`, `hreflang`, Open Graph и JSON-LD, хэширует скрипт и пишет `robots.txt`, `sitemap.xml`, `_redirects` и `_headers` для Netlify. На Netlify сборка запускается сама (`netlify.toml`); выкладка на свой сервер с nginx описана в [DEPLOY.md](DEPLOY.md). Подробности и замеры: `SEO_PERFORMANCE_REPORT.md`.
+The build turns the sources into the pages `/ru`, `/en`, `/ru|en/terms`, `/ru|en/privacy` and `/ru|en/cookies` (the English text is already in the HTML), inlines the CSS, adds `canonical`, `hreflang`, Open Graph and JSON-LD, hashes the script, and writes `robots.txt`, `sitemap.xml`, `_redirects` and `_headers` for Netlify. On Netlify the build runs by itself (`netlify.toml`); deploying to your own nginx server is described in [DEPLOY.md](DEPLOY.md). Details and measurements: `SEO_PERFORMANCE_REPORT.md`.
 
-> API курсов пускает запросы только с адреса сайта (CORS). Локально калькулятор покажет «Курс временно недоступен», пока адрес `127.0.0.1` не добавят на стороне API или пока запросы к `/api/*` не идут через прокси.
+> The rates API only accepts requests from the site's own origin (CORS). Locally the calculator shows "Rate temporarily unavailable" until `127.0.0.1` is allowed on the API side or requests to `/api/*` go through a proxy.
 
-## Перед запуском в продакшн
+## Before going to production
 
-- [ ] Заполнить в админке ссылки (`telegramBotUrl`, `telegramMiniAppUrl`, `whatsappUrl`): сайт берёт их из `GET /api/admin/public-config`. Сейчас `whatsappUrl` ведёт на Telegram-бота.
-- [ ] Заменить демо-отзывы в `REVIEWS` на настоящие (с разрешения клиентов).
-- [ ] Добавить боевой домен в CORS на стороне EX-88 API.
-- [ ] Настроить `www.ex88.ru` (DNS и сертификат) с редиректом на `https://ex88.ru`.
-- [ ] После выкладки отправить `https://ex88.ru/sitemap.xml` в Google Search Console и Яндекс Вебмастер.
-- [ ] Вернуть бегущую строку курсов, если она нужна (сейчас скрыта в шапке `index.html`).
+- [ ] Fill in the links in the admin panel (`telegramBotUrl`, `telegramMiniAppUrl`, `whatsappUrl`): the site reads them from `GET /api/admin/public-config`. Right now `whatsappUrl` points to the Telegram bot.
+- [ ] Replace the demo reviews in `REVIEWS` with real ones (with the customers' permission).
+- [ ] Add the production domain to CORS on the EX-88 API side.
+- [ ] Set up `www.ex88.ru` (DNS and certificate) with a redirect to `https://ex88.ru`.
+- [ ] After deploy, submit `https://ex88.ru/sitemap.xml` to Google Search Console and Yandex Webmaster.
+- [ ] Bring back the rate ticker if it is needed (it is currently hidden in the `index.html` header).
 
 ---
 
 <div align="center">
-<sub>Сделано <a href="https://github.com/Ceyhun1999">Jeywa Studio</a> для Ex88 · SATANG DANG &amp; CO COMPANY LIMITED</sub>
+<sub>Made by <a href="https://github.com/Ceyhun1999">Jeywa Studio</a> for Ex88 · SATANG DANG &amp; CO COMPANY LIMITED</sub>
 </div>
